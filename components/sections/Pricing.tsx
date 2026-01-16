@@ -1,4 +1,4 @@
-import PricingCard from "../PricingCard";
+import PricingCard from "../ui/PricingCard";
 
 export default function PricingSection() {
   const defaultFeatures = [
