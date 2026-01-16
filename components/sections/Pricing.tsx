@@ -1,6 +1,6 @@
 import PricingCard from "../ui/PricingCard";
 
-export default function PricingSection() {
+export default function Pricing() {
   const defaultFeatures = [
     "Automated Meeting Scheduling",
     "Automated Meeting Scheduling",
