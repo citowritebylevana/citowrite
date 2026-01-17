@@ -1,0 +1,94 @@
+import React from 'react';
+import ContactCard from '../ui/ContactCard';
+import { MailsIcon, MessageCircle } from 'lucide-react';
+
+export default function Contact() {
+  return (
+    <section className="py-15 px-4 md:px-17.5">
+
+      {/* Main Card Container */}
+      <div className=" rounded-[20px] border border-gray-500 p-6 md:p-12 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+        {/* Left Column: Info */}
+        <div className="flex flex-col">
+          <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-[#f5f5f5] mb-4.5">
+            Hubungi Kami
+          </h2>
+          <p className="text-[#f5f5f5] text-base/6 mb-10">
+            Silakan hubungi kami untuk diskusi awal mengenai kebutuhan penelitian dan
+            penulisan ilmiah Anda. Konsultasi dilakukan secara profesional dan terarah.
+          </p>
+
+          <div className="space-y-4">
+            <ContactCard
+              icon={MessageCircle}
+              title="Whatsapp"
+              value="0812 - 3456 - 7890"
+              href="https://wa.me/6281234567890"
+            />
+            <ContactCard
+              icon={MailsIcon}
+              title="Email"
+              value="citowrite@gmail.com"
+              href="mailto:citowrite@gmail.com"
+            />
+          </div>
+        </div>
+
+        {/* Right Column: Form */}
+        <form className="flex flex-col gap-2.5 rounded-[20px] p-2.5 border border-gray-500">
+
+          {/* Name Input */}
+          <div className="flex flex-col gap-2">
+            <input
+              type="text"
+              placeholder="Nama"
+              className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
+
+              shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
+
+              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
+
+                "
+            />
+          </div>
+
+          {/* Email Input */}
+          <div className="flex flex-col gap-2">
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full rounded-[10px] px-8 py-4  placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
+
+                shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
+
+                hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
+                "
+            />
+          </div>
+
+          {/* Message Textarea */}
+          <div className="flex flex-col gap-2">
+            <textarea
+              rows={15}
+              placeholder="Tulis pesan kamu disini"
+              className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all resize-none 
+              shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_15px_10px_40px_0px_rgba(0,0,0,0.2),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] 
+              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold py-3.5 rounded-full transition-all shadow-lg shadow-purple-900/20 mt-2"
+          >
+            Kirim
+          </button>
+
+        </form>
+      </div>
+
+    </section>
+  );
+}

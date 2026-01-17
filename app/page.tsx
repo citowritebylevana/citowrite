@@ -1,4 +1,5 @@
 import About from "@/components/sections/About";
+import Contact from "@/components/sections/Contact";
 import Hero from "@/components/sections/Hero";
 import LogoMarquee from "@/components/sections/LogoMarquee";
 import Pricing from "@/components/sections/Pricing";
@@ -16,5 +17,6 @@ export default function Home() {
       <Process />
       <Testimonial />
       <Pricing />
+      <Contact />
     </>)
 }
