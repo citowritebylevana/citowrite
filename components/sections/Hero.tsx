@@ -2,7 +2,7 @@ import { AlignLeft, ArrowRight, Instagram } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative py-10 px-4 md:px-17.5">
+    <section className="relative py-10 px-4 md:px-17.5 md:mt-35">
 
       <div className="absolute inset-0 z-10 pointer-events-none bg-noise opacity-15 mix-blend-overlay"></div>      {/* Container Utama dengan Background Gradient */}
       <div className="relative w-full rounded-[30px] overflow-hidden px-6 py-16 md:px-12 md:py-20 text-center">
