@@ -5,7 +5,7 @@ import FaqItem from '../ui/FaqItem';
 
 export default function FaqSection() {
   // Hanya simpan 1 index yang aktif.
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
