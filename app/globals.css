@@ -36,3 +36,24 @@ body {
   background: #222222;
   color: var(--foreground);
 }
+
+/* Swiper Centered Slide Scaling */
+/* .swiper-slide { */
+/*   opacity: 1; */
+/*   margin: 0px; */
+/* } */
+
+/* .swiper-slide-active { */
+/*   opacity: 1; */
+/*   scale: 1; */
+/* } */
+/**/
+/* .swiper-slide-next { */
+/*   opacity: 0.6; */
+/*   scale: 0.85; */
+/* } */
+/**/
+/* .swiper-slide-prev { */
+/*   opacity: 0.6; */
+/*   scale: 0.85; */
+/* } */
