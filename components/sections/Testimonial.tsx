@@ -9,6 +9,7 @@ import "swiper/css";
 
 export default function Testimonial() {
   const swiperRef = useRef<SwiperRef>(null);
+  // Return statement will have id="testimoni"
 
   const testimonials = [
     {
@@ -62,7 +63,7 @@ export default function Testimonial() {
   ];
 
   return (
-    <section className="py-15 px-4 md:px-17.5">
+    <section id="testimoni" className="py-15 px-4 md:px-17.5 md:scroll-mt-14">
       {/* Header */}
       <div className="text-center mb-16 space-y-4">
         <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-white">
@@ -110,7 +111,6 @@ export default function Testimonial() {
             </SwiperSlide>
           ))}
         </Swiper>
-
       </div>
     </section>
   );

@@ -20,7 +20,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
+    { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Testimoni', href: '#testimoni' },
     { name: 'Service', href: '#service' },
@@ -48,7 +48,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-x-7.5">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className="text-[#f5f5f5] text-base/5 transition-colors relative group"
@@ -56,7 +56,7 @@ export default function Navbar() {
                 {link.name}
                 {/* Underline hover effect */}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-500 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -80,14 +80,14 @@ export default function Navbar() {
       >
         <div className="flex flex-col px-4 py-4 space-y-4">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
               className="text-gray-300 hover:text-purple-400 font-medium px-4 py-2 hover:bg-white/5 rounded-lg transition-colors"
             >
               {link.name}
-            </Link>
+            </a>
           ))}
         </div>
       </div>

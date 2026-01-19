@@ -1,11 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { SiWhatsapp } from '@icons-pack/react-simple-icons';
+import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 export default function Hero() {
-  const [backgroundImage, setBackgroundImage] = useState("url('/assets/hero-background-mobile.png')");
+  const [backgroundImage, setBackgroundImage] = useState(
+    "url('/assets/hero-background-mobile.png')",
+  );
 
   useEffect(() => {
     const updateBackground = () => {
@@ -17,18 +19,18 @@ export default function Hero() {
     };
 
     updateBackground();
-    window.addEventListener('resize', updateBackground);
-    return () => window.removeEventListener('resize', updateBackground);
+    window.addEventListener("resize", updateBackground);
+    return () => window.removeEventListener("resize", updateBackground);
   }, []);
   return (
-    <section id="#home" className="relative py-10 px-4 md:px-17.5 md:mt-35">
-
+    <section id="home" className="relative py-10 px-4 md:px-17.5 md:pt-45">
       {/* Container Utama dengan Background Image */}
-      <div className="relative w-full rounded-[30px] overflow-hidden px-6 py-16 md:px-12 md:py-26.25 text-center bg-cover bg-center" style={{ backgroundImage }}>
-
+      <div
+        className="relative w-full rounded-[30px] overflow-hidden px-6 py-16 md:px-12 md:py-26.25 text-center bg-cover bg-center"
+        style={{ backgroundImage }}
+      >
         {/* Konten Utama */}
         <div className="relative z-10 flex flex-col items-center justify-center mx-auto text-[#f5f5f5]">
-
           {/* Heading */}
           <h2 className="text-3xl md:text-[60px]/18.75 font-semibold ">
             Hai Doc! Kami Bantu Apa Hari Ini
@@ -36,17 +38,19 @@ export default function Hero() {
 
           {/* Deskripsi */}
           <p className="text-[#f5f5f5] text-sm md:text-[18px]/6.75 max-w-[88ch] md:mt-2 md:mb-5">
-            CITO Write membantu mahasiswa kedokteran, PPDS, dan dokter klinisi menyusun karya ilmiah yang rapi, logis, dan
-            siap submit—mulai dari proposal, skripsi, hingga systematic review & meta-analysis—dengan mentoring step-by-
-            step dan standar akademik yang jelas.
+            CITO Write membantu mahasiswa kedokteran, PPDS, dan dokter klinisi
+            menyusun karya ilmiah yang rapi, logis, dan siap submit—mulai dari
+            proposal, skripsi, hingga systematic review & meta-analysis—dengan
+            mentoring step-by- step dan standar akademik yang jelas.
           </p>
 
           {/* Group Tombol */}
           <div className="flex flex-col sm:flex-row gap-x-5 w-full sm:w-auto">
-
             {/* Tombol Order (Solid) */}
-            <button className="flex items-center gap-x-2.5 justify-center px-8 py-2.5 bg-indigo-500 hover:bg-purple-700 rounded-[50px] text-base
-              font-semibold transition-all duration-200 group">
+            <button
+              className="flex items-center gap-x-2.5 justify-center px-8 py-2.5 bg-indigo-500 hover:bg-purple-700 rounded-[50px] text-base
+              font-semibold transition-all duration-200 group"
+            >
               Order Sekarang
               <span className="h-8 w-8 flex justify-center items-center shrink-0 group-hover:translate-x-1 transition-transform duration-200">
                 <ArrowRight />
@@ -54,15 +58,15 @@ export default function Hero() {
             </button>
 
             {/* Tombol WhatsApp (Outline) */}
-            <button className="flex items-center justify-center gap-x-2.5 px-8 py-2.5 bg-transparent border border-indigo-500 hover:bg-white/10 text-[#f5f5f5]
-              rounded-[50px] text-base/5 font-medium transition-all duration-200">
+            <button
+              className="flex items-center justify-center gap-x-2.5 px-8 py-2.5 bg-transparent border border-indigo-500 hover:bg-white/10 text-[#f5f5f5]
+              rounded-[50px] text-base/5 font-medium transition-all duration-200"
+            >
               Chat Whatsapp Admin
               <SiWhatsapp />
             </button>
-
           </div>
         </div>
-
       </div>
     </section>
   );

@@ -1,22 +1,21 @@
-import React from 'react';
-import ContactCard from '../ui/ContactCard';
-import { MailsIcon, MessageCircle } from 'lucide-react';
+import React from "react";
+import ContactCard from "../ui/ContactCard";
+import { MailsIcon, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section className="py-15 px-4 md:px-17.5">
-
+    <section id="contact" className="py-15 px-4 md:px-17.5 md:scroll-mt-20">
       {/* Main Card Container */}
       <div className=" rounded-[20px] border border-gray-500 p-6 md:p-12 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-
         {/* Left Column: Info */}
         <div className="flex flex-col">
           <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-[#f5f5f5] mb-4.5">
             Hubungi Kami
           </h2>
           <p className="text-[#f5f5f5] text-base/6 mb-10">
-            Silakan hubungi kami untuk diskusi awal mengenai kebutuhan penelitian dan
-            penulisan ilmiah Anda. Konsultasi dilakukan secara profesional dan terarah.
+            Silakan hubungi kami untuk diskusi awal mengenai kebutuhan
+            penelitian dan penulisan ilmiah Anda. Konsultasi dilakukan secara
+            profesional dan terarah.
           </p>
 
           <div className="space-y-4">
@@ -37,7 +36,6 @@ export default function Contact() {
 
         {/* Right Column: Form */}
         <form className="flex flex-col gap-2.5 rounded-[20px] p-2.5 border border-gray-500">
-
           {/* Name Input */}
           <div className="flex flex-col gap-2">
             <input
@@ -85,10 +83,8 @@ export default function Contact() {
           >
             Kirim
           </button>
-
         </form>
       </div>
-
     </section>
   );
 }

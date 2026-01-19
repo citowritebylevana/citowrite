@@ -1,7 +1,5 @@
-import { Bot, Clock, Inbox, Users } from 'lucide-react';
-import StatCard from '../ui/StatsCard';
-
-
+import { Bot, Clock, Inbox, Users } from "lucide-react";
+import StatCard from "../ui/StatsCard";
 
 export default function About() {
   const stats = [
@@ -12,17 +10,16 @@ export default function About() {
   ];
 
   return (
-    <section className="py-15 px-4 md:px-16.75">
-
+    <section id="about" className="py-15 px-4 md:px-16.75 md:scroll-mt-35">
       {/* Header Text */}
       <div className="mb-10 space-y-4.5 text-center">
         <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-[#f5f5f5]">
           Siapa Kami & Apa yang Kami Bantu
         </h2>
         <p className="text-[#f5f5f5] text-sm md:text-[18px]/6.75 max-w-[73ch] mx-auto">
-          Kami menyediakan layanan pendampingan penelitian dan penulisan ilmiah di bidang kedokteran.
-          Kami membantu mahasiswa FK menyusun, merapikan, dan menyelesaikan karya ilmiah secara
-          sistematis dan profesional.
+          Kami menyediakan layanan pendampingan penelitian dan penulisan ilmiah
+          di bidang kedokteran. Kami membantu mahasiswa FK menyusun, merapikan,
+          dan menyelesaikan karya ilmiah secara sistematis dan profesional.
         </p>
       </div>
 
@@ -32,7 +29,6 @@ export default function About() {
           <StatCard key={index} {...stat} />
         ))}
       </div>
-
     </section>
   );
 }

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 interface FormData {
   name: string;
@@ -13,20 +13,24 @@ interface FormData {
 
 export default function OrderForm() {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    serviceType: '',
-    details: '',
-    fileLink: ''
+    name: "",
+    email: "",
+    serviceType: "",
+    details: "",
+    fileLink: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -36,17 +40,17 @@ export default function OrderForm() {
 
     try {
       // Add your form submission logic here
-      console.log('Form submitted:', formData);
+      console.log("Form submitted:", formData);
       // Reset form after successful submission
       setFormData({
-        name: '',
-        email: '',
-        serviceType: '',
-        details: '',
-        fileLink: ''
+        name: "",
+        email: "",
+        serviceType: "",
+        details: "",
+        fileLink: "",
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -55,20 +59,19 @@ export default function OrderForm() {
   return (
     <div className="w-full max-w-600 mx-auto py-10 px-4">
       <div className="rounded-[20px] border border-white/10 backdrop-blur-sm p-8 md:p-12 bg-black/40">
-
         {/* Header */}
         <div className="mb-8 space-y-3">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Formulir Pemesanan Citowrite
           </h1>
           <p className="text-gray-300 text-base md:text-lg">
-            Lengkapi detail kebutuhan akademik anda dibawah ini untuk memulai pendampingan profesional.
+            Lengkapi detail kebutuhan akademik anda dibawah ini untuk memulai
+            pendampingan profesional.
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-
           {/* Nama Lengkap */}
           <div>
             <label className="block text-sm font-semibold text-indigo-400 mb-2">
@@ -114,12 +117,24 @@ export default function OrderForm() {
                 className="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-lg text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all appearance-none cursor-pointer"
                 required
               >
-                <option value="" disabled className="bg-gray-900">Pilih Jenis layanan</option>
-                <option value="proposal" className="bg-gray-900">Proposal Penelitian</option>
-                <option value="skripsi" className="bg-gray-900">Skripsi Lengkap</option>
-                <option value="tesis" className="bg-gray-900">Tesis</option>
-                <option value="meta-analysis" className="bg-gray-900">Meta-Analysis</option>
-                <option value="other" className="bg-gray-900">Lainnya</option>
+                <option value="" disabled className="bg-gray-900">
+                  Pilih Jenis layanan
+                </option>
+                <option value="proposal" className="bg-gray-900">
+                  Proposal Penelitian
+                </option>
+                <option value="skripsi" className="bg-gray-900">
+                  Skripsi Lengkap
+                </option>
+                <option value="tesis" className="bg-gray-900">
+                  Tesis
+                </option>
+                <option value="meta-analysis" className="bg-gray-900">
+                  Meta-Analysis
+                </option>
+                <option value="other" className="bg-gray-900">
+                  Lainnya
+                </option>
               </select>
             </div>
           </div>
