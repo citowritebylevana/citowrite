@@ -72,7 +72,7 @@ export default function Pricing() {
       </div>
 
       {/* Grid Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-6 lg:gap-10 mb-10">
         {cards.map((card, index) => (
           <PricingCard
             key={index}
@@ -84,7 +84,7 @@ export default function Pricing() {
       {/* Bottom Floating CTA */}
       <div className="flex justify-center">
         <button className="bg-violet-500 hover:bg-purple-600 text-[#f5f5f5] font-semibold
-            py-3 px-8 rounded-full transition-colors duration-200 shadow-lg shadow-purple-900/20">
+            py-2.5 px-8 rounded-[50px] transition-colors duration-200">
           Tanyakan Paket & Harga Lengkap
         </button>
       </div>

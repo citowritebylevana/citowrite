@@ -18,7 +18,7 @@ export default function PricingCard({
 }: PricingCardProps) {
   return (
     <div
-      className={`flex flex-col p-6 rounded-[20px] transition-all ease-out duration-300 h-full
+      className={`flex flex-col p-6 rounded-[20px] transition-all ease-out duration-300 h-full min-h-121.25 max-h-121.25
       ${isHighlighted
           ? 'border border-violet-500 shadow-[inset_-1px_4px_20.8px_rgba(123,57,255,0.25),0px_0px_30px_0_rgba(97,95,255,1)] bg-linear-to-b from-[rgba(33,33,33,0)] to-[rgba(97,95,255,0.3)] z-10'
           : `shadow-[inset_-10px_-10px_70px_0px_rgba(255,255,255,0.1),inset_20px_20px_50px_0px_rgba(0,0,0,0.7),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)] 
@@ -59,10 +59,10 @@ export default function PricingCard({
 
       {/* CTA Button */}
       < button
-        className={`w-full py-2.5 px-8 rounded-[50px] font-medium transition-all duration-200
+        className={`w-full py-2.5 px-8 rounded-[50px] font-medium text-base/5 transition-all duration-200
         ${isHighlighted
-            ? 'bg-violet-500 hover:bg-purple-700 text-white shadow-lg shadow-purple-900/20'
-            : 'bg-transparent border border-violet-500 text-gray-200 hover:border-gray-400 hover:bg-white/5'
+            ? 'bg-violet-500 hover:bg-purple-700 text-[#f5f5f5]'
+            : 'bg-transparent border border-violet-500 text-[#f5f5f5]  hover:bg-white/5'
           }`}
       >
         Pesan Sekarang

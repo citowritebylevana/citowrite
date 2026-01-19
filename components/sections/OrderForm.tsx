@@ -33,7 +33,7 @@ export default function OrderForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Add your form submission logic here
       console.log('Form submitted:', formData);
@@ -55,7 +55,7 @@ export default function OrderForm() {
   return (
     <div className="w-full max-w-600 mx-auto py-10 px-4">
       <div className="rounded-[20px] border border-white/10 backdrop-blur-sm p-8 md:p-12 bg-black/40">
-        
+
         {/* Header */}
         <div className="mb-8 space-y-3">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
@@ -68,7 +68,7 @@ export default function OrderForm() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          
+
           {/* Nama Lengkap */}
           <div>
             <label className="block text-sm font-semibold text-indigo-400 mb-2">

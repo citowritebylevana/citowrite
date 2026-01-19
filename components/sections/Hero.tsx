@@ -45,7 +45,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-x-5 w-full sm:w-auto">
 
             {/* Tombol Order (Solid) */}
-            <button className="flex items-center gap-x-2.5 justify-center px-8 py-2.5 bg-indigo-500 hover:bg-[#4845c4] rounded-[50px] text-base
+            <button className="flex items-center gap-x-2.5 justify-center px-8 py-2.5 bg-indigo-500 hover:bg-purple-700 rounded-[50px] text-base
               font-semibold transition-all duration-200 group">
               Order Sekarang
               <span className="h-8 w-8 flex justify-center items-center shrink-0 group-hover:translate-x-1 transition-transform duration-200">
