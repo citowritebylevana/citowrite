@@ -12,14 +12,14 @@ export default function About() {
   ];
 
   return (
-    <section className="py-15 px-4 md:px-18.75">
+    <section className="py-15 px-4 md:px-16.75">
 
       {/* Header Text */}
       <div className="mb-10 space-y-4.5 text-center">
         <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-[#f5f5f5]">
           Siapa Kami & Apa yang Kami Bantu
         </h2>
-        <p className="text-[#f5f5f5] leading-relaxed text-sm md:text-[18px]/6.75 max-w-[73ch] mx-auto">
+        <p className="text-[#f5f5f5] text-sm md:text-[18px]/6.75 max-w-[73ch] mx-auto">
           Kami menyediakan layanan pendampingan penelitian dan penulisan ilmiah di bidang kedokteran.
           Kami membantu mahasiswa FK menyusun, merapikan, dan menyelesaikan karya ilmiah secara
           sistematis dan profesional.
@@ -27,7 +27,7 @@ export default function About() {
       </div>
 
       {/* Grid Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[37.33]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.18fr_1fr_1fr_1.18fr] items-start gap-[37.33px]">
         {stats.map((stat, index) => (
           <StatCard key={index} {...stat} />
         ))}
