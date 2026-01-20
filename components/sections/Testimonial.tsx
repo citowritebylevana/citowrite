@@ -63,13 +63,13 @@ export default function Testimonial() {
   ];
 
   return (
-    <section id="testimoni" className="py-15 px-4 md:px-17.5 md:scroll-mt-14">
+    <section id="testimoni" className="p-4 md:py-15 md:px-17.5 md:scroll-mt-14">
       {/* Header */}
-      <div className="text-center mb-16 space-y-4">
-        <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-white">
+      <div className="text-center mb-4 md:mb-16 space-y-4">
+        <h2 className="text-[28px]/9.5 md:text-[44px]/14.5 font-bold text-white">
           Testimoni
         </h2>
-        <p className="max-w-[70ch] mx-auto text-sm md:text-base/6">
+        <p className="max-w-[70ch] mx-auto text-base/6 md:text-base/6">
           Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket
           pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan
           akademik Anda.

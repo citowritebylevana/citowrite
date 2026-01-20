@@ -18,7 +18,7 @@ export default function PricingCard({
 }: PricingCardProps) {
   return (
     <div
-      className={`flex flex-col p-6 rounded-[20px] transition-all ease-out duration-300 h-full min-h-121.25 max-h-121.25
+      className={`flex flex-col p-5 md:p-6 rounded-[20px] transition-all ease-out duration-300 h-full
       ${isHighlighted
           ? 'border border-violet-500 shadow-[inset_-1px_4px_20.8px_rgba(123,57,255,0.25),0px_0px_30px_0_rgba(97,95,255,1)] bg-linear-to-b from-[rgba(33,33,33,0)] to-[rgba(97,95,255,0.3)] z-10'
           : `shadow-[inset_-10px_-10px_70px_0px_rgba(255,255,255,0.1),inset_20px_20px_50px_0px_rgba(0,0,0,0.7),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)] 
@@ -33,7 +33,7 @@ export default function PricingCard({
       </h3 >
 
       {/* Description */}
-      < p className="text-white text-base mb-10" >
+      < p className="text-white text-base/6 mb-10" >
         {description}
       </p >
 
@@ -49,7 +49,7 @@ export default function PricingCard({
       < ul className="space-y-1.5 mb-10 grow" >
         {
           features.map((feature, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-indigo-50 text-sm">
+            <li key={idx} className="flex items-start gap-2 md:gap-3 text-indigo-50 text-sm">
               <Check className="w-6 h-6 shrink-0 text-violet-500" />
               <span>{feature}</span>
             </li>

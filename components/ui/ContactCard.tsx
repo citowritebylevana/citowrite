@@ -28,7 +28,7 @@ export default function ContactCard({
       {/* Text Info */}
       <div className="flex-1">
         <h4 className="text-violet-500 font-semibold text-base/5 mb-0.5">{title}</h4>
-        <p className="text-[#f5f5f5] text-base/6">{value}</p>
+        <p className="text-[#f5f5f5] text-sm md:text-base/6">{value}</p>
       </div>
 
       {/* Arrow Icon */}

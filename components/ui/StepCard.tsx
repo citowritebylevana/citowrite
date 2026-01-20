@@ -21,13 +21,13 @@ export default function StepCard({
       {/* Number */}
       <div
         className="inline-flex items-center
-        justify-center w-13 h-13 rounded-full text-2xl/8 font-bold mb-4.25 
+        justify-center w-11.5 h-11.5 md:w-13 md:h-13 rounded-full text-[20px]/6.5 md:text-2xl/8 font-bold mb-4.25 
          text-violet-500 border border-violet-500 group-hover:bg-violet-500 group-hover:text-[#333333] transition-colors duration-300">
         {number}
       </div>
 
       {/* Title */}
-      <h3 className="text-[20px]/6.5 font-bold text-white mb-2">{title}</h3>
+      <h3 className="text-[18px]/5.75 md:text-[20px]/6.5 font-bold text-white mb-2">{title}</h3>
 
       {/* Description */}
       <p className="text-base/6 text-gray-300 text-center">{description}</p>

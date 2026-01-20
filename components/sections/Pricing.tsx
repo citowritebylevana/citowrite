@@ -64,13 +64,13 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="w-full min-h-screen py-16 px-4 md:px-17.5">
+    <section id="pricing" className="w-full min-h-screen md:py-16 p-4 md:px-17.5">
       {/* Header Section */}
-      <div className="text-center mb-10 space-y-4">
-        <h2 className="text-4xl md:text-[44px]/14.5 font-bold text-white">
+      <div className="text-center mb-10 space-y-2 md:space-y-4">
+        <h2 className="text-[28px]/9.5 md:text-[44px]/14.5 font-bold text-white">
           Pendampingan Sesuai Kebutuhan Akademik
         </h2>
-        <p className="md:text-base/6 text-white max-w-[70ch] mx-auto">
+        <p className="mb:4 md:m-0 md:text-base/6 text-white max-w-[70ch] mx-auto">
           Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket
           pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan
           akademik Anda.
@@ -78,7 +78,7 @@ export default function Pricing() {
       </div>
 
       {/* Grid Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-6 lg:gap-10 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-6 lg:gap-10 my-7.5  md:mt-0 md:mb-10">
         {cards.map((card, index) => (
           <PricingCard key={index} {...card} />
         ))}
@@ -88,7 +88,7 @@ export default function Pricing() {
       <div className="flex justify-center">
         <button
           className="bg-violet-500 hover:bg-purple-600 text-[#f5f5f5] font-semibold
-            py-2.5 px-8 rounded-[50px] transition-colors duration-200"
+            py-2.5 px-4 md:px-8 text-sm rounded-[50px] transition-colors duration-200"
         >
           Tanyakan Paket & Harga Lengkap
         </button>

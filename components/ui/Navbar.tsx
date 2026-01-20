@@ -33,11 +33,11 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
       ${scrolled ? 'bg-[#111111]/80 backdrop-blur-md py-0.5' : 'py-1 bg-transparent'}`}
     >
-      <div className="max-w-450 mx-auto md:px-17.5">
+      <div className="max-w-450 mx-auto px-4 md:px-17.5">
         <div className="flex items-center justify-between">
 
           {/* Logo Section */}
-          <Link href="/" className="cursor-pointer h-25 w-25">
+          <Link href="/" className="h-10.5 w-10.5 cursor-pointer md:h-25 md:w-25">
             <Image
               src={logo}
               height={150}
@@ -64,7 +64,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+              className="text-white py-5 hover:bg-white/10 rounded-lg transition-colors"
             >
               {isOpen ? <X /> : <Menu />}
             </button>
@@ -75,7 +75,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`md:hidden absolute top-full left-0 w-full bg-[#111111] border-b border-white/10 transition-all duration-300 ease-in-out overflow-hidden
+        className={`md:hidden absolute top-full left-0 w-full  bg-[#111111]/80 z-55 backdrop-blur-md  transition-all duration-300 ease-in-out overflow-hidden
         ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
       >
         <div className="flex flex-col px-4 py-4 space-y-4">

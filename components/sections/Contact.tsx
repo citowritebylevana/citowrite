@@ -1,28 +1,28 @@
-import React from "react";
 import ContactCard from "../ui/ContactCard";
-import { MailsIcon, MessageCircle } from "lucide-react";
+import { MailsIcon } from "lucide-react";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-15 px-4 md:px-17.5 md:scroll-mt-20">
+    <section id="contact" className="md:py-15 p-4 md:px-17.5 md:scroll-mt-20">
       {/* Main Card Container */}
-      <div className=" rounded-[20px] border border-gray-500 p-6 md:p-12 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+      <div className=" rounded-[20px] md:border gap-y-5 md:border-gray-500 md:p-12 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         {/* Left Column: Info */}
         <div className="flex flex-col">
           <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-[#f5f5f5] mb-4.5">
             Hubungi Kami
           </h2>
-          <p className="text-[#f5f5f5] text-base/6 mb-10">
+          <p className="text-[#f5f5f5] text-base/6 mb-5 md:mb-10">
             Silakan hubungi kami untuk diskusi awal mengenai kebutuhan
             penelitian dan penulisan ilmiah Anda. Konsultasi dilakukan secara
             profesional dan terarah.
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-5 md:space-y-4">
             <ContactCard
-              icon={MessageCircle}
+              icon={SiWhatsapp}
               title="Whatsapp"
-              value="0812 - 3456 - 7890"
+              value="081234567890"
               href="https://wa.me/6281234567890"
             />
             <ContactCard
@@ -56,7 +56,7 @@ export default function Contact() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full rounded-[10px] px-8 py-4  placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
+              className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
 
                 shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
 
@@ -79,7 +79,7 @@ export default function Contact() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-violet-500 hover:bg-purple-700 text-[#f5f5f5] font-semibold py-3.5 rounded-[50px] transition-all "
+            className="w-full bg-violet-500 hover:bg-purple-700 text-[#f5f5f5] font-semibold py-2 md:py-3.5 rounded-[50px] transition-all "
           >
             Kirim
           </button>

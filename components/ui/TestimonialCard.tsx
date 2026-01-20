@@ -12,7 +12,7 @@ export default function TestimonialCard({
   role,
 }: TestimonialCardProps) {
   return (
-    <div className="rounded-[20px] my-1 p-3.5 flex flex-col min-h-125 shadow-[inset_-10px_-10px_10px_0px_rgba(255,255,255,0.02),inset_10px_7px_15px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]">
+    <div className="rounded-[20px] m-1 mt-7.5 md:mt-1 p-3.5 flex flex-col min-h-125 shadow-[inset_-10px_-10px_10px_0px_rgba(255,255,255,0.02),inset_10px_7px_15px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]">
       {/* Image Placeholder */}
       <div className="w-full h-58 bg-gray-400/30 rounded-2xl">
         {/* Placeholder visual */}
@@ -27,7 +27,7 @@ export default function TestimonialCard({
       {/* User Info */}
       <div className="flex items-center gap-x-2.5 mt-auto">
         {/* Avatar */}
-        <div className="w-12 h-12 rounded-full bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+        <div className="w-11.5 h-11.5 md:w-12 md:h-12 rounded-full bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
