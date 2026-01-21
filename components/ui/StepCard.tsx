@@ -2,7 +2,6 @@ interface StepCardProps {
   number: string;
   title: string;
   description: string;
-  isFilled: boolean;
 }
 
 export default function StepCard({

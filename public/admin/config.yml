@@ -1,7 +1,7 @@
 local_backend: true
 
 editor:
- preview: false
+  preview: false
 
 backend:
   name: git-gateway
@@ -34,83 +34,131 @@ collections:
     label: "Edit Halaman Home"
     files:
       # --- FILE 1: HERO ---
-      - name: "hero"  # <--- Nama entry ini 'hero'
+      - name: "hero"
         label: "1. Hero Section"
-        file: "content/hero.md"
+        file: "contents/hero.md"
         fields:
-          - { label: "Headline", name: "title", widget: "text" }
+          - { label: "Headline", name: "title", widget: "string" }
           - { label: "Subheadline", name: "subtitle", widget: "text" }
 
-      # --- FILE 2: ABOUT (Keluarkan dari 'fields' hero, buat sejajar) ---
+      # --- FILE 2: ABOUT ---
       - name: "about"
         label: "2. About Section"
-        file: "content/about.md" # Simpan di file terpisah
+        file: "contents/about.md"
         fields:
-          - { label: "Paragraf 1", name: "paragraf_1", widget: "text" }
-          - { label: "Paragraf 2", name: "paragraf_2", widget: "text" }
-
-      # --- FILE 3: COHORT ---
-      - name: "cohort"
-        label: "3. Cohort Section"
-        file: "content/cohort.md"
-        fields:
-          - label: "Daftar Paket"
-            name: "packages"
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Statistik"
+            name: "stats"
             widget: "list"
-            summary: "{{title}} - Rp {{price}}"
+            summary: "{{fields.value}} {{fields.label}}"
+            fields:
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Nilai", name: "value", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+
+      # --- FILE 3: PROCESS ---
+      - name: "process"
+        label: "3. Process Section"
+        file: "contents/process.md"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Langkah-langkah"
+            name: "steps"
+            widget: "list"
+            summary: "{{fields.number}}. {{fields.title}}"
+            fields:
+              - { label: "Nomor", name: "number", widget: "string" }
+              - { label: "Judul", name: "title", widget: "string" }
+              - { label: "Deskripsi", name: "description", widget: "text" }
+
+      # --- FILE 4: PRICING ---
+      - name: "pricing"
+        label: "4. Pricing Section"
+        file: "contents/pricing.md"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Paket Harga"
+            name: "cards"
+            widget: "list"
+            summary: "{{fields.title}} - {{fields.price}}"
             fields:
               - { label: "Judul Paket", name: "title", widget: "string" }
               - { label: "Deskripsi", name: "description", widget: "text" }
-              - { label: "Harga", name: "price", widget: "number" }
-              - { label: "Tautan", name: "link", widget: "string" }
+              - { label: "Harga", name: "price", widget: "string" }
               - label: "Fitur"
                 name: "features"
                 widget: "list"
                 summary: "{{fields.item}}"
                 field: { label: "Item", name: "item", widget: "string" }
-              - { label: "Populer?", name: "isPopular", widget: "boolean", default: false }
-
-      # --- FILE 4: PRIVATE ---
-      - name: "private_section"
-        label: "4. Private Class"
-        file: "content/private.md"
-        fields:
-          - label: "Daftar Paket"
-            name: "packages"
-            widget: "list"
-            summary: "{{title}}"
-            fields:
-              - { label: "Judul", name: "title", widget: "string" }
-              - { label: "Deskripsi", name: "description", widget: "text" }
-              - label: "Fitur"
-                name: "features"
-                widget: "list"
-                summary: "{{fields.item}}"
-                field: { label: "Item", name: "item", widget: "string" }
+              - {
+                  label: "Populer?",
+                  name: "isHighlighted",
+                  widget: "boolean",
+                  default: false,
+                }
 
       # --- FILE 5: TESTIMONIAL ---
       - name: "testimonial"
-        label: "5. Testimonial"
-        file: "content/testimonial.md"
+        label: "5. Testimonial Section"
+        file: "contents/testimonial.md"
         fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
           - label: "Daftar Testimoni"
-            name: "items"
+            name: "testimonials"
             widget: "list"
-            summary: "{{name}} - {{role}}"
+            summary: "{{fields.name}} - {{fields.role}}"
             fields:
               - { label: "Konten", name: "content", widget: "text" }
               - { label: "Nama", name: "name", widget: "string" }
               - { label: "Role", name: "role", widget: "string" }
 
       # --- FILE 6: FAQ ---
-      - name: "faq_section"
-        label: "6. FAQ"
-        file: "content/faq.md"
+      - name: "faq"
+        label: "6. FAQ Section"
+        file: "contents/faq.md"
         fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
           - label: "Daftar Pertanyaan"
             name: "faqs"
             widget: "list"
-            summary: "{{question}}"
+            summary: "{{fields.question}}"
             fields:
               - { label: "Pertanyaan", name: "question", widget: "string" }
- 
+              - { label: "Jawaban", name: "answer", widget: "text" }
+
+      # --- FILE 7: CONTACT ---
+      - name: "contact"
+        label: "7. Contact Section"
+        file: "contents/contact.md"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Daftar Kontak"
+            name: "contacts"
+            widget: "list"
+            summary: "{{fields.title}}: {{fields.value}}"
+            fields:
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Judul", name: "title", widget: "string" }
+              - { label: "Nilai", name: "value", widget: "string" }
+              - { label: "Link", name: "href", widget: "string" }
+
+      # --- FILE 8: LOGO MARQUEE ---
+      - name: "logomarquee"
+        label: "8. Logo Marquee Section"
+        file: "contents/logomarquee.md"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Daftar Logo"
+            name: "logos"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Nama", name: "name", widget: "string" }
+              - { label: "Gambar", name: "image", widget: "image" }

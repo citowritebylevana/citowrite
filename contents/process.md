@@ -1,11 +1,13 @@
 ---
 title: Cara Kerja Simple
-subtitle: Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan akademik Anda.
+subtitle: Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket
+  pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan akademik
+  Anda.
 steps:
   - number: "1"
     title: Kirim Kebutuhan
     description: Isi form singkat tentang topik & deadline via whatsapp
-    isFilled: false
+    isFilled: true
   - number: "2"
     title: Mini Assessment
     description: Kami cek scope & feasibility naskah kamu (free)
