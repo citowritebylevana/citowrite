@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/sections/Footer";
 
 const poppins = Poppins({
   weight: ["600", "500"],
   variable: "--font-poppins",
-  subsets: ["latin"]
-})
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,14 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className={`${poppins.variable} antialiased`}
-      >
+      <body className={`${poppins.variable} antialiased`}>
         <Navbar />
-        <div className="max-w-450 mx-auto">
-          {children}
-        </div>
-        <Footer />
+        <div className="max-w-450 mx-auto">{children}</div>
       </body>
     </html>
   );

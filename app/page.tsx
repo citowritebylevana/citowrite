@@ -8,18 +8,30 @@ import Pricing from "@/components/sections/Pricing";
 import Process from "@/components/sections/Process";
 import Testimonial from "@/components/sections/Testimonial";
 
-
 export default function Home() {
-
   return (
     <>
-      <Hero />
-      <About />
+      <div id="home">
+        <Hero />
+      </div>
+      <div id="about">
+        <About />
+      </div>
       <LogoMarquee />
-      <Process />
-      <Testimonial />
+      <div id="service">
+        <Process />
+      </div>
+      <div id="testimoni">
+        <Testimonial />
+      </div>
       <Pricing />
-      <Faq />
-      <Contact />
-    </>)
+      <div id="faq">
+        <Faq />
+      </div>
+      <div id="contact">
+        <Contact />
+      </div>
+      <Footer />
+    </>
+  );
 }

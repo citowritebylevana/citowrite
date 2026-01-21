@@ -70,7 +70,7 @@ export default function Pricing() {
         <h2 className="text-[28px]/9.5 md:text-[44px]/14.5 font-bold text-white">
           Pendampingan Sesuai Kebutuhan Akademik
         </h2>
-        <p className="mb:4 md:m-0 md:text-base/6 text-white max-w-[70ch] mx-auto">
+        <p className="text-white text-center max-w-[70ch] mx-auto mb:4 md:text-base/6 ">
           Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket
           pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan
           akademik Anda.

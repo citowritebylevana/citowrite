@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import logo from '@/public/logos/site/logo.png'
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
@@ -9,6 +10,8 @@ import { Menu, X } from 'lucide-react';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Efek untuk mendeteksi scroll agar background navbar berubah
   useEffect(() => {
@@ -27,6 +30,23 @@ export default function Navbar() {
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  const handleSmoothScroll = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/order') {
+      e.preventDefault();
+      router.push('/' + href);
+    } else {
+      // Jika sudah di landing page, scroll smooth ke section
+      e.preventDefault();
+      const sectionId = href.replace('#', '');
+      const element = document.getElementById(sectionId);
+      
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav
@@ -51,6 +71,7 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleSmoothScroll(link.href, e)}
                 className="text-[#f5f5f5] text-base/5 transition-colors relative group"
               >
                 {link.name}
@@ -72,25 +93,21 @@ export default function Navbar() {
 
         </div>
       </div>
-
-      {/* Mobile Menu Dropdown */}
-      <div
-        className={`md:hidden absolute top-full left-0 w-full  bg-[#111111]/80 z-55 backdrop-blur-md  transition-all duration-300 ease-in-out overflow-hidden
-        ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-      >
-        <div className="flex flex-col px-4 py-4 space-y-4">
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden flex flex-col px-4 py-4 space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleSmoothScroll(link.href, e)}
               className="text-gray-300 hover:text-purple-400 font-medium px-4 py-2 hover:bg-white/5 rounded-lg transition-colors"
             >
               {link.name}
             </a>
           ))}
         </div>
-      </div>
+      )}
     </nav>
   );
 }
