@@ -2,7 +2,32 @@ import ContactCard from "../ui/ContactCard";
 import { MailsIcon } from "lucide-react";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
-export default function Contact() {
+interface ContactItem {
+  icon: string;
+  title: string;
+  value: string;
+  href: string;
+}
+
+interface ContactProps {
+  data: {
+    title: string;
+    subtitle: string;
+    contacts: ContactItem[];
+  };
+}
+
+const iconMap: Record<string, any> = {
+  SiWhatsapp,
+  MailsIcon,
+};
+
+export default function Contact({ data }: ContactProps) {
+  const contactsWithIcons = data.contacts.map((contact) => ({
+    ...contact,
+    icon: iconMap[contact.icon] || SiWhatsapp,
+  }));
+
   return (
     <section id="contact" className="md:py-15 p-4 md:px-17.5 md:scroll-mt-20">
       {/* Main Card Container */}
@@ -10,27 +35,16 @@ export default function Contact() {
         {/* Left Column: Info */}
         <div className="flex flex-col">
           <h2 className="text-3xl md:text-[44px]/14.5 font-bold text-[#f5f5f5] mb-4.5">
-            Hubungi Kami
+            {data.title}
           </h2>
           <p className="text-[#f5f5f5] text-base/6 mb-5 md:mb-10">
-            Silakan hubungi kami untuk diskusi awal mengenai kebutuhan
-            penelitian dan penulisan ilmiah Anda. Konsultasi dilakukan secara
-            profesional dan terarah.
+            {data.subtitle}
           </p>
 
           <div className="space-y-5 md:space-y-4">
-            <ContactCard
-              icon={SiWhatsapp}
-              title="Whatsapp"
-              value="081234567890"
-              href="https://wa.me/6281234567890"
-            />
-            <ContactCard
-              icon={MailsIcon}
-              title="Email"
-              value="citowrite@gmail.com"
-              href="mailto:citowrite@gmail.com"
-            />
+            {contactsWithIcons.map((contact, index) => (
+              <ContactCard key={index} {...contact} />
+            ))}
           </div>
         </div>
 

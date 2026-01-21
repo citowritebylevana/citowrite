@@ -3,7 +3,20 @@
 import React, { useState } from "react";
 import FaqItem from "../ui/FaqItem";
 
-export default function FaqSection() {
+interface FaqItemData {
+  question: string;
+  answer: string;
+}
+
+interface FaqProps {
+  data: {
+    title: string;
+    subtitle: string;
+    faqs: FaqItemData[];
+  };
+}
+
+export default function FaqSection({ data }: FaqProps) {
   // Hanya simpan 1 index yang aktif.
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -11,62 +24,19 @@ export default function FaqSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Data FAQ
-  const faqs = [
-    {
-      id: 0,
-      question: "Apakah layanan ini menggunakan AI?",
-      answer:
-        "Tidak. Kami menjamin 100% pengerjaan dilakukan oleh manusia (tim dokter dan akademisi) untuk memastikan validitas medis dan alur logika yang natural. Kami juga menyertakan bukti lolos deteksi AI.",
-    },
-    {
-      id: 1,
-      question: "Berapa lama proses pengerjaan naskah?",
-      answer:
-        "Durasi pengerjaan bergantung pada paket yang diambil dan kompleksitas topik. Namun, rata-rata pengerjaan proposal memakan waktu 5-7 hari kerja, sedangkan full skripsi menyesuaikan feedback dosen.",
-    },
-    {
-      id: 2,
-      question: "Apakah ada garansi revisi?",
-      answer:
-        "Ya, kami memberikan garansi revisi minor tanpa batas selama 7 hari setelah file dikirim. Untuk revisi mayor (perubahan topik/judul dari dosen), akan ada penyesuaian biaya yang fair.",
-    },
-    {
-      id: 3,
-      question: "Bagaimana sistem pembayarannya?",
-      answer:
-        "Pembayaran dapat dilakukan dalam 2 tahap (DP 50% di awal dan pelunasan setelah draft diperlihatkan) untuk kenyamanan dan keamanan transaksi Anda.",
-    },
-    {
-      id: 4,
-      question: "Apakah data penelitian saya aman?",
-      answer:
-        "Sangat aman. Kami menerapkan kebijakan privasi ketat. Data pasien dan identitas klien tidak akan dipublikasikan atau digunakan untuk kepentingan lain tanpa izin.",
-    },
-    {
-      id: 5,
-      question: "Bisa bantu analisis statistik juga?",
-      answer:
-        "Tentu. Tim kami terdiri dari ahli statistik yang terbiasa menggunakan SPSS, STATA, atau R untuk analisis data kedokteran, termasuk uji validitas, reliabilitas, hingga multivariat.",
-    },
-  ];
-
   // LOGIKA PENTING: Memisahkan data menjadi Kolom Kiri (Ganjil) dan Kanan (Genap)
   // Ini mencegah gap kosong saat item dibuka.
-  const leftColumnFaqs = faqs.filter((_, i) => i % 2 === 0);
-  const rightColumnFaqs = faqs.filter((_, i) => i % 2 !== 0);
+  const leftColumnFaqs = data.faqs.filter((_, i) => i % 2 === 0);
+  const rightColumnFaqs = data.faqs.filter((_, i) => i % 2 !== 0);
 
   return (
     <section id="faq" className="md:py-15 p-4 md:px-17.5 md:scroll-mt-40">
       {/* Header */}
       <div className="text-center mb-4 md:mb-10 space-y-2 md:space-y-4.5 text-[#f5f5f5]">
         <h2 className="text-[28px]/9.5 md:text-[44px]/14.5 font-bold">
-          Frequently Asked Questions
+          {data.title}
         </h2>
-        <p className="text-base/6">
-          Informasi singkat untuk membantu Anda memahami layanan dan proses
-          pendampingan kami.
-        </p>
+        <p className="text-base/6">{data.subtitle}</p>
       </div>
 
       {/* LAYOUT FIX: 
@@ -76,26 +46,26 @@ export default function FaqSection() {
       <div className="flex flex-col lg:flex-row gap-y-3.75 md:gap-6 items-start mt-7.5 md:m-0">
         {/* Kolom Kiri */}
         <div className="flex-1 flex flex-col gap-6 w-full">
-          {leftColumnFaqs.map((faq) => (
+          {leftColumnFaqs.map((faq, index) => (
             <FaqItem
-              key={faq.id}
+              key={index}
               question={faq.question}
               answer={faq.answer}
-              isOpen={openIndex === faq.id}
-              onClick={() => handleToggle(faq.id)}
+              isOpen={openIndex === index * 2}
+              onClick={() => handleToggle(index * 2)}
             />
           ))}
         </div>
 
         {/* Kolom Kanan */}
         <div className="flex-1 flex flex-col gap-6 w-full">
-          {rightColumnFaqs.map((faq) => (
+          {rightColumnFaqs.map((faq, index) => (
             <FaqItem
-              key={faq.id}
+              key={index}
               question={faq.question}
               answer={faq.answer}
-              isOpen={openIndex === faq.id}
-              onClick={() => handleToggle(faq.id)}
+              isOpen={openIndex === index * 2 + 1}
+              onClick={() => handleToggle(index * 2 + 1)}
             />
           ))}
         </div>

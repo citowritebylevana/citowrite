@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import OrderForm from "@/components/sections/OrderForm";
 
 export default function OrderPage() {
-  return <OrderForm />;
+  return (
+    <Suspense fallback={<div className="w-full px-4 py-18">Loading...</div>}>
+      <OrderForm />
+    </Suspense>
+  );
 }

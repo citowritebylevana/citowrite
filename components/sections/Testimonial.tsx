@@ -7,72 +7,32 @@ import TestimonialCard from "../ui/TestimonialCard";
 import type { SwiperRef } from "swiper/react";
 import "swiper/css";
 
-export default function Testimonial() {
-  const swiperRef = useRef<SwiperRef>(null);
-  // Return statement will have id="testimoni"
+interface TestimonialItem {
+  content: string;
+  name: string;
+  role: string;
+}
 
-  const testimonials = [
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Yoga",
-      role: "Mahasiswa FK",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Yoga",
-      role: "Mahasiswa FK",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Yoga",
-      role: "Mahasiswa FK",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Budi",
-      role: "Mahasiswa Teknik",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Siti",
-      role: "Mahasiswa Hukum",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Siti",
-      role: "Mahasiswa Hukum",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Siti",
-      role: "Mahasiswa Hukum",
-    },
-    {
-      content:
-        "Lorem ipsum dolor sit amet consectetur. Ullamcorper felis lacus ac purus nisl velit volutpat tristique non. Semper urna quisque sapien viverra nisl consequat lectus magna. Arcu id nec mauris amet in.",
-      name: "Siti",
-      role: "Mahasiswa Hukum",
-    },
-  ];
+interface TestimonialProps {
+  data: {
+    title: string;
+    subtitle: string;
+    testimonials: TestimonialItem[];
+  };
+}
+
+export default function Testimonial({ data }: TestimonialProps) {
+  const swiperRef = useRef<SwiperRef>(null);
 
   return (
     <section id="testimoni" className="p-4 md:py-15 md:px-17.5 md:scroll-mt-14">
       {/* Header */}
       <div className="text-center mb-4 md:mb-16 space-y-4">
         <h2 className="text-[28px]/9.5 md:text-[44px]/14.5 font-bold text-white">
-          Testimoni
+          {data.title}
         </h2>
         <p className="max-w-[70ch] mx-auto text-base/6 md:text-base/6">
-          Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket
-          pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan
-          akademik Anda.
+          {data.subtitle}
         </p>
       </div>
 
@@ -105,7 +65,7 @@ export default function Testimonial() {
           }}
           className="pb-4"
         >
-          {testimonials.map((item, index) => (
+          {data.testimonials.map((item, index) => (
             <SwiperSlide key={index} className="h-auto">
               <TestimonialCard {...item} />
             </SwiperSlide>

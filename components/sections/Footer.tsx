@@ -1,11 +1,11 @@
 'use client'; // Pastikan ada directive ini karena menggunakan useState
 
-import React, { useState } from 'react'; // Tambahkan useState
+import { useState } from 'react'; // Tambahkan useState
 import Link from 'next/link';
 import logo from '@/public/logos/site/logo-horizontal.png'
 import Image from 'next/image';
-import { ChevronDown, Linkedin } from 'lucide-react'; // Tambahkan icon untuk indikator accordion
-import { SiInstagram, SiX } from '@icons-pack/react-simple-icons';
+import { ChevronDown } from 'lucide-react'; // Tambahkan icon untuk indikator accordion
+import { SiGmail, SiInstagram, SiWhatsapp } from '@icons-pack/react-simple-icons';
 
 export default function Footer() {
   // State untuk accordion mobile
@@ -61,11 +61,11 @@ export default function Footer() {
           <div className='mt-5 md:m-0'>
             <h3 className="text-[#f5f5f5] text-base/5 font-medium">Social Media</h3>
             <div className="flex gap-6 my-2.5 text-violet-400">
-              <a href="#" aria-label="Instagram"><SiInstagram /></a>
-              <a href="#" aria-label="LinkedIn"><Linkedin /></a>
-              <a href="#" aria-label="X"><SiX /></a>
+              <a href="https://instagram.com/citowrite.id" target='_blank' aria-label="Instagram"><SiInstagram /></a>
+              <a href='mailto:citowrite.id@gmail.com' target='_blank' aria-label="Gmail"><SiGmail /></a>
+              <a href="https://wa.me/08114341297" target='_blank' aria-label="Whatsapp"><SiWhatsapp /></a>
             </div>
-            <p className="text-[#f5f5f5] text-base/5 font-medium">@Citowrite</p>
+            <p className="text-[#f5f5f5] text-base/5 font-medium">@citowrite.id</p>
           </div>
 
         </div>

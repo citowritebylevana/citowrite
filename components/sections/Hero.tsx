@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
-export default function Hero() {
+interface HeroProps {
+  data: {
+    title: string;
+    subtitle: string;
+  };
+}
+
+
+export default function Hero({ data }: HeroProps) {
   const [backgroundImage, setBackgroundImage] = useState(
     "url('/assets/hero-background-mobile.png')",
   );
@@ -33,15 +41,12 @@ export default function Hero() {
         <div className="relative z-10 flex flex-col items-center justify-center mx-auto text-[#f5f5f5]">
           {/* Heading */}
           <h2 className="text-[48px]/11.5 md:text-[60px]/18.75 font-semibold ">
-            Hai Doc! Kami Bantu Apa Hari Ini
+            {data.title}
           </h2>
 
           {/* Deskripsi */}
           <p className="text-[#f5f5f5] text-base/6 md:text-[18px]/6.75 md:max-w-[88ch] mt-2 mb-5">
-            CITO Write membantu mahasiswa kedokteran, PPDS, dan dokter klinisi
-            menyusun karya ilmiah yang rapi, logis, dan siap submit—mulai dari
-            proposal, skripsi, hingga systematic review & meta-analysis—dengan
-            mentoring step-by- step dan standar akademik yang jelas.
+            {data.subtitle}
           </p>
 
           {/* Group Tombol */}

@@ -1,7 +1,8 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface FormData {
   name: string;
@@ -11,7 +12,17 @@ interface FormData {
   fileLink: string;
 }
 
+// Mapping dari title pricing card ke service type options
+const serviceMapping: Record<string, string> = {
+  "PPT Sidang": "ppt-sidang",
+  "Hasil Skripsi": "hasil-skripsi",
+  "Proposal Skripsi": "proposal-skripsi",
+};
+
 export default function OrderForm() {
+  const searchParams = useSearchParams();
+  const service = searchParams.get("service");
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -21,6 +32,16 @@ export default function OrderForm() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Set serviceType berdasarkan query parameter
+  useEffect(() => {
+    if (service && serviceMapping[service]) {
+      setFormData((prev) => ({
+        ...prev,
+        serviceType: serviceMapping[service],
+      }));
+    }
+  }, [service]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -71,7 +92,10 @@ export default function OrderForm() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-5 items-start">
+        <form
+          onSubmit={handleSubmit}
+          className="grid md:grid-cols-2 gap-5 items-start"
+        >
           {/* Nama Lengkap */}
           <div>
             <label className="block text-sm font-semibold text-indigo-500 mb-2.5">
@@ -129,23 +153,19 @@ export default function OrderForm() {
 
               hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
               "
-
               required
             >
               <option value="" disabled className="bg-gray-900">
                 Pilih Jenis layanan
               </option>
-              <option value="proposal" className="bg-gray-900">
-                Proposal Penelitian
+              <option value="ppt-sidang" className="bg-gray-900">
+                PPT Sidang
               </option>
-              <option value="skripsi" className="bg-gray-900">
-                Skripsi Lengkap
+              <option value="hasil-skripsi" className="bg-gray-900">
+                Hasil Skripsi
               </option>
-              <option value="tesis" className="bg-gray-900">
-                Tesis
-              </option>
-              <option value="meta-analysis" className="bg-gray-900">
-                Meta-Analysis
+              <option value="proposal-skripsi" className="bg-gray-900">
+                Proposal Skripsi
               </option>
               <option value="other" className="bg-gray-900">
                 Lainnya
