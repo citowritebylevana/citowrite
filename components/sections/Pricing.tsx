@@ -64,7 +64,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="w-full min-h-screen md:py-16 p-4 md:px-17.5">
+    <section id="pricing" className="w-full min-h-screen md:py-16 p-4 md:px-17.5 md:scroll-mt-15">
       {/* Header Section */}
       <div className="text-center mb-10 space-y-2 md:space-y-4">
         <h2 className="text-[28px]/9.5 md:text-[44px]/14.5 font-bold text-white">
@@ -86,12 +86,12 @@ export default function Pricing() {
 
       {/* Bottom Floating CTA */}
       <div className="flex justify-center">
-        <button
+        <a href="https://youtube.com" target="_blank"
           className="bg-violet-500 hover:bg-purple-600 text-[#f5f5f5] font-semibold
             py-2.5 px-4 md:px-8 text-sm rounded-[50px] transition-colors duration-200"
         >
           Tanyakan Paket & Harga Lengkap
-        </button>
+        </a>
       </div>
     </section>
   );

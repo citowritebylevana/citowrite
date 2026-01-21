@@ -1,7 +1,6 @@
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 import Faq from "@/components/sections/Faq";
-import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
 import LogoMarquee from "@/components/sections/LogoMarquee";
 import Pricing from "@/components/sections/Pricing";
@@ -31,7 +30,6 @@ export default function Home() {
       <div id="contact">
         <Contact />
       </div>
-      <Footer />
     </>
   );
 }

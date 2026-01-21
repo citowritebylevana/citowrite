@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
+import FooterWrapper from "@/components/ui/FooterWrapper";
 
 const poppins = Poppins({
   weight: ["600", "500"],
@@ -24,7 +25,8 @@ export default function RootLayout({
       <body className={`${poppins.variable} antialiased`}>
         <Navbar />
         <div className="max-w-450 mx-auto">{children}</div>
-      </body>
+        <FooterWrapper />
+      </body >
     </html>
   );
 }

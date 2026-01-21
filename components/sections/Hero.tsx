@@ -47,7 +47,7 @@ export default function Hero() {
           {/* Group Tombol */}
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
             {/* Tombol Order (Solid) */}
-            <button
+            <a href="#pricing"
               className="flex items-center gap-x-2.5 justify-center pr-8 pl-9.5 md:px-8 py-2.5 bg-indigo-500 hover:bg-purple-700 rounded-[50px] text-base/5
               font-semibold transition-all duration-200 group"
             >
@@ -55,16 +55,16 @@ export default function Hero() {
               <span className="h-8 w-8 flex justify-center items-center shrink-0 group-hover:translate-x-1 transition-transform duration-200">
                 <ArrowRight />
               </span>
-            </button>
+            </a>
 
             {/* Tombol WhatsApp (Outline) */}
-            <button
+            <a href="https://whatsapp.com/193323" target="_blank"
               className="flex items-center justify-center gap-x-2.5 pr-8 pl-9.5 md:px-8 py-2.5 bg-transparent border border-indigo-500 hover:bg-white/10 text-[#f5f5f5]
               rounded-[50px] text-base/5 font-medium transition-all duration-200"
             >
               Chat Whatsapp Admin
               <SiWhatsapp />
-            </button>
+            </a>
           </div>
         </div>
       </div>
