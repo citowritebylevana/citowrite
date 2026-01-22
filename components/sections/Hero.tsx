@@ -45,7 +45,7 @@ export default function Hero({ data }: HeroProps) {
           </h2>
 
           {/* Deskripsi */}
-          <p className="text-[#f5f5f5] text-base/6 md:text-[18px]/6.75 md:max-w-[88ch] mt-2 mb-5">
+          <p className="text-[#f5f5f5] text-base/6 md:text-[18px]/6.75 md:max-w-[88ch] mt-2 mb-10">
             {data.subtitle}
           </p>
 

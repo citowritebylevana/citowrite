@@ -1,6 +1,9 @@
+"use client";
+
 import ContactCard from "../ui/ContactCard";
 import { MailsIcon } from "lucide-react";
 import { SiWhatsapp } from "@icons-pack/react-simple-icons";
+import { useState, useEffect } from "react";
 
 interface ContactItem {
   icon: string;
@@ -17,16 +20,115 @@ interface ContactProps {
   };
 }
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
 const iconMap: Record<string, any> = {
   SiWhatsapp,
   MailsIcon,
 };
 
 export default function Contact({ data }: ContactProps) {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  // Ensure component only renders on client side to avoid hydration mismatch
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const contactsWithIcons = data.contacts.map((contact) => ({
     ...contact,
     icon: iconMap[contact.icon] || SiWhatsapp,
   }));
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      // Validasi input
+      if (!formData.name.trim()) {
+        throw new Error("Nama wajib diisi");
+      }
+      if (!formData.email.trim()) {
+        throw new Error("Email wajib diisi");
+      }
+      if (!formData.message.trim()) {
+        throw new Error("Pesan wajib diisi");
+      }
+
+      // Kirim ke API email
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: `Pesan dari ${formData.name.trim()}`,
+          message: formData.message.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.error || "Gagal mengirim email. Coba lagi."
+        );
+      }
+
+      // Tampilkan notif sukses
+      setSubmitStatus({
+        type: "success",
+        message: "✓ Pesan berhasil dikirim! Tim kami akan segera menghubungi Anda.",
+      });
+
+      // Reset form
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+        setSubmitStatus({ type: null, message: "" });
+      }, 3000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Terjadi kesalahan yang tidak terduga";
+      setSubmitStatus({
+        type: "error",
+        message: `✗ ${errorMessage}`,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" className="md:py-15 p-4 md:px-17.5 md:scroll-mt-20">
@@ -49,55 +151,93 @@ export default function Contact({ data }: ContactProps) {
         </div>
 
         {/* Right Column: Form */}
-        <form className="flex flex-col gap-2.5 rounded-[20px] p-2.5 border border-gray-500">
-          {/* Name Input */}
-          <div className="flex flex-col gap-2">
-            <input
-              type="text"
-              placeholder="Nama"
-              className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
+        {isClient && (
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-2.5 rounded-[20px] p-2.5 border border-gray-500"
+          >
+            {/* Status Messages */}
+            {submitStatus.type && (
+              <div
+                className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  submitStatus.type === "success"
+                    ? "bg-green-500/20 text-green-300 border border-green-500/50"
+                    : "bg-red-500/20 text-red-300 border border-red-500/50"
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
 
-              shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
-
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-
-                "
-            />
-          </div>
-
-          {/* Email Input */}
-          <div className="flex flex-col gap-2">
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
+            {/* Name Input */}
+            <div className="flex flex-col gap-2">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Nama"
+                required
+                className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
 
                 shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
 
                 hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-                "
-            />
-          </div>
 
-          {/* Message Textarea */}
-          <div className="flex flex-col gap-2">
-            <textarea
-              rows={15}
-              placeholder="Tulis pesan kamu disini"
-              className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all resize-none 
-              shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_15px_10px_40px_0px_rgba(0,0,0,0.2),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] 
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
-            />
-          </div>
+                  "
+              />
+            </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-violet-500 hover:bg-purple-700 text-[#f5f5f5] font-semibold py-2 md:py-3.5 rounded-[50px] transition-all "
-          >
-            Kirim
-          </button>
-        </form>
+            {/* Email Input */}
+            <div className="flex flex-col gap-2">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
+                required
+                className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all 
+
+                  shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
+
+                  hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
+                  "
+              />
+            </div>
+
+            {/* Message Textarea */}
+            <div className="flex flex-col gap-2">
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={15}
+                placeholder="Tulis pesan kamu disini"
+                required
+                className="w-full rounded-[10px] px-8 py-4 placeholder-[#f5f5f5] focus:outline-none focus:border-none focus:ring-0 transition-all resize-none 
+                shadow-[inset_-20px_-20px_40px_0px_rgba(255,255,255,0.04),inset_15px_10px_40px_0px_rgba(0,0,0,0.2),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] 
+                hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-violet-500 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-[#f5f5f5] font-semibold py-2 md:py-3.5 rounded-[50px] transition-all flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <>
+                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  Mengirim...
+                </>
+              ) : (
+                "Kirim"
+              )}
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );

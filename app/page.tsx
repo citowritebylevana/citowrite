@@ -20,10 +20,10 @@ interface StatItem {
 }
 type AboutData =
   | {
-      title: string;
-      subtitle: string;
-      stats: StatItem[];
-    }
+    title: string;
+    subtitle: string;
+    stats: StatItem[];
+  }
   | undefined;
 
 interface Brand {
@@ -32,9 +32,9 @@ interface Brand {
 }
 type LogoMarqueeData =
   | {
-      title: string;
-      brands: Brand[];
-    }
+    title: string;
+    brands: Brand[];
+  }
   | undefined;
 
 interface StepItem {
@@ -45,10 +45,10 @@ interface StepItem {
 }
 type ProcessData =
   | {
-      title: string;
-      subtitle: string;
-      steps: StepItem[];
-    }
+    title: string;
+    subtitle: string;
+    steps: StepItem[];
+  }
   | undefined;
 
 interface TestimonialItem {
@@ -58,10 +58,10 @@ interface TestimonialItem {
 }
 type TestimonialData =
   | {
-      title: string;
-      subtitle: string;
-      testimonials: TestimonialItem[];
-    }
+    title: string;
+    subtitle: string;
+    testimonials: TestimonialItem[];
+  }
   | undefined;
 
 interface PricingCard {
@@ -73,12 +73,12 @@ interface PricingCard {
 }
 type PricingData =
   | {
-      title: string;
-      subtitle: string;
-      cards: PricingCard[];
-      cta_text: string;
-      cta_link: string;
-    }
+    title: string;
+    subtitle: string;
+    cards: PricingCard[];
+    cta_text: string;
+    cta_link: string;
+  }
   | undefined;
 
 interface FaqItemData {
@@ -87,10 +87,10 @@ interface FaqItemData {
 }
 type FaqData =
   | {
-      title: string;
-      subtitle: string;
-      faqs: FaqItemData[];
-    }
+    title: string;
+    subtitle: string;
+    faqs: FaqItemData[];
+  }
   | undefined;
 
 interface ContactItem {
@@ -101,10 +101,10 @@ interface ContactItem {
 }
 type ContactData =
   | {
-      title: string;
-      subtitle: string;
-      contacts: ContactItem[];
-    }
+    title: string;
+    subtitle: string;
+    contacts: ContactItem[];
+  }
   | undefined;
 
 function getSectionData(filename: string): Record<string, unknown> | undefined {
@@ -151,7 +151,7 @@ export default function Home() {
           }
         }
       />
-      <div id="service">
+      <div>
         <Process
           data={
             (processData as ProcessData) || {
@@ -173,17 +173,20 @@ export default function Home() {
           }
         />
       </div>
-      <Pricing
-        data={
-          (pricingData as PricingData) || {
-            title: "",
-            subtitle: "",
-            cards: [],
-            cta_text: "",
-            cta_link: "",
+      <div id="service">
+        <Pricing
+          data={
+            (pricingData as PricingData) || {
+              title: "",
+              subtitle: "",
+              cards: [],
+              cta_text: "",
+              cta_link: "",
+            }
           }
-        }
-      />
+        />
+      </div>
+
       <div id="faq">
         <Faq
           data={

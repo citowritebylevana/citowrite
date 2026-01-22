@@ -3,13 +3,19 @@
 import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { sendWhatsAppMessage, formatOrderFormMessage } from "@/lib/whatsapp";
 
 interface FormData {
   name: string;
   email: string;
   serviceType: string;
   details: string;
-  fileLink: string;
+  file: File | null;
+}
+
+interface UploadedFile {
+  fileUrl: string;
+  fileName: string;
 }
 
 // Mapping dari title pricing card ke service type options
@@ -28,10 +34,15 @@ export default function OrderForm() {
     email: "",
     serviceType: "",
     details: "",
-    fileLink: "",
+    file: null,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   // Set serviceType berdasarkan query parameter
   useEffect(() => {
@@ -48,35 +59,119 @@ export default function OrderForm() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, type } = e.target;
+
+    if (type === "file") {
+      const fileInput = e.target as HTMLInputElement;
+      const file = fileInput.files?.[0] || null;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: file,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
 
     try {
-      // Add your form submission logic here
-      console.log("Form submitted:", formData);
-      // Reset form after successful submission
-      setFormData({
-        name: "",
-        email: "",
-        serviceType: "",
-        details: "",
-        fileLink: "",
+      // Validasi form
+      if (!formData.name.trim()) {
+        throw new Error("Nama lengkap wajib diisi");
+      }
+      if (!formData.email.trim()) {
+        throw new Error("Email wajib diisi");
+      }
+      if (!formData.serviceType) {
+        throw new Error("Jenis layanan wajib dipilih");
+      }
+      if (!formData.details.trim()) {
+        throw new Error("Detail kebutuhan wajib diisi");
+      }
+
+      let finalFileUrl = "";
+
+      // 1. LOGIKA UPLOAD (Jika user melampirkan file)
+      if (formData.file) {
+        try {
+          const uploadResponse = await fetch(
+            `/api/upload?filename=${encodeURIComponent(formData.file.name)}`,
+            {
+              method: "POST",
+              body: formData.file,
+            }
+          );
+
+          if (!uploadResponse.ok) {
+            const errorData = await uploadResponse.json().catch(() => ({}));
+            throw new Error(
+              errorData.error || "Gagal mengupload file. Coba lagi."
+            );
+          }
+
+          const uploadedData = await uploadResponse.json();
+          finalFileUrl = uploadedData.fileUrl;
+          setUploadedFile(uploadedData);
+        } catch (uploadError) {
+          console.error("Upload error:", uploadError);
+          throw new Error(
+            uploadError instanceof Error
+              ? uploadError.message
+              : "Terjadi kesalahan saat mengupload file"
+          );
+        }
+      }
+
+      // 2. KIRIM KE WHATSAPP
+      const messageData = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        serviceType: formData.serviceType,
+        details: formData.details.trim(),
+        fileLink: finalFileUrl,
+      };
+
+      const message = formatOrderFormMessage(messageData);
+      sendWhatsAppMessage(message);
+
+      // 3. TAMPILKAN NOTIF SUKSES
+      setSubmitStatus({
+        type: "success",
+        message:
+          "✓ Pesan berhasil dikirim ke WhatsApp! Silakan selesaikan obrolan dengan tim kami.",
       });
+
+      // 4. RESET FORM
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          serviceType: "",
+          details: "",
+          file: null,
+        });
+        setUploadedFile(null);
+        setSubmitStatus({ type: null, message: "" });
+      }, 3000);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Terjadi kesalahan yang tidak terduga";
+      setSubmitStatus({
+        type: "error",
+        message: `✗ ${errorMessage}`,
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return (
     <div className="w-full px-4 max-w-600 mx-auto py-18 md:px-17.5 md:mt-18">
       <div className="rounded-[20px] md:border md:border-gray-500 md:p-5">
@@ -90,6 +185,18 @@ export default function OrderForm() {
             pendampingan profesional.
           </p>
         </div>
+
+        {/* Status Messages */}
+        {submitStatus.type && (
+          <div
+            className={`mb-6 px-4 py-3 rounded-lg text-sm font-medium transition-all ${submitStatus.type === "success"
+                ? "bg-green-500/20 text-green-300 border border-green-500/50"
+                : "bg-red-500/20 text-red-300 border border-red-500/50"
+              }`}
+          >
+            {submitStatus.message}
+          </div>
+        )}
 
         {/* Form */}
         <form
@@ -200,12 +307,11 @@ export default function OrderForm() {
               File Pendukung (Apabila ada)
             </label>
             <p className="text-sm text-[#f5f5f5] mb-2.5">
-              Pastikan berupa link Google Drive dengan akses viewer/editor
+              File akan diupload ke Google Drive dan link-nya akan dikirim
             </p>
             <input
               type="file"
-              name="fileLink"
-              value={formData.fileLink}
+              name="file"
               onChange={handleChange}
               className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none
 
@@ -214,16 +320,30 @@ export default function OrderForm() {
               hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
               "
             />
+            {uploadedFile && (
+              <p className="text-sm text-green-400 mt-2">
+                ✓ File &quot{uploadedFile.fileName}&quot siap dikirim
+              </p>
+            )}
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="justify-self-start md:w-auto flex items-center gap-2 justify-center px-8 py-3 bg-indigo-500 hover:bg-purple-700 disabled:bg-gray-600 text-white font-semibold rounded-full transition-all duration-200 mt-5"
+            className="justify-self-start md:w-auto flex items-center gap-2 justify-center px-8 py-3 bg-indigo-500 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-full transition-all duration-200 mt-5"
           >
-            Order Sekarang
-            <ArrowRight className="w-5 h-5" />
+            {isSubmitting ? (
+              <>
+                <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+                Mengirim...
+              </>
+            ) : (
+              <>
+                Order Sekarang
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
           </button>
         </form>
       </div>

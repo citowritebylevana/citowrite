@@ -18,7 +18,7 @@ interface ProcessProps {
 
 export default function Process({ data }: ProcessProps) {
   return (
-    <section id="service" className=" md:py-15 p-4 md:px-17.5 md:scroll-mt-45">
+    <section className=" md:py-15 p-4 md:px-17.5 md:scroll-mt-45">
       {/* Header */}
       <div className="mb-4 md:mb-16 space-y-2 md:py-3.75 md:space-y-4.5 text-center">
         <h2 className="text-[28px]/9.5 max-w-[15ch] mx-auto text-center md:text-[44px]/14.5 font-bold text-[#f5f5f5]">

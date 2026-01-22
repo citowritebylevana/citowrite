@@ -21,7 +21,7 @@ interface PricingProps {
 export default function Pricing({ data }: PricingProps) {
   return (
     <section
-      id="pricing"
+      id="service"
       className="w-full min-h-screen md:py-16 p-4 md:px-17.5 md:scroll-mt-15"
     >
       {/* Header Section */}
