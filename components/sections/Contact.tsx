@@ -64,71 +64,31 @@ export default function Contact({ data }: ContactProps) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: "" });
-
-    try {
-      // Validasi input
-      if (!formData.name.trim()) {
-        throw new Error("Nama wajib diisi");
-      }
-      if (!formData.email.trim()) {
-        throw new Error("Email wajib diisi");
-      }
-      if (!formData.message.trim()) {
-        throw new Error("Pesan wajib diisi");
-      }
-
-      // Kirim ke API email
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          subject: `Pesan dari ${formData.name.trim()}`,
-          message: formData.message.trim(),
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "Gagal mengirim email. Coba lagi.");
-      }
-
-      // Tampilkan notif sukses
-      setSubmitStatus({
-        type: "success",
-        message:
-          "✓ Pesan berhasil dikirim! Tim kami akan segera menghubungi Anda.",
-      });
-
-      // Reset form
-      setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
-        setSubmitStatus({ type: null, message: "" });
-      }, 3000);
-    } catch (error) {
-      console.error("Error sending message:", error);
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Terjadi kesalahan yang tidak terduga";
-      setSubmitStatus({
-        type: "error",
-        message: `✗ ${errorMessage}`,
-      });
-    } finally {
-      setIsSubmitting(false);
+    
+    // Validasi input
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+        alert("Mohon lengkapi semua field required");
+        setIsSubmitting(false);
+        return;
     }
+
+    const subject = `Pesan dari ${formData.name}`;
+    const body = `Nama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`;
+    
+    // Buka email client default
+    window.location.href = `mailto:citowrite.id@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    setIsSubmitting(false);
+    
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
@@ -160,11 +120,10 @@ export default function Contact({ data }: ContactProps) {
             {/* Status Messages */}
             {submitStatus.type && (
               <div
-                className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                  submitStatus.type === "success"
+                className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${submitStatus.type === "success"
                     ? "bg-green-500/20 text-green-300 border border-green-500/50"
                     : "bg-red-500/20 text-red-300 border border-red-500/50"
-                }`}
+                  }`}
               >
                 {submitStatus.message}
               </div>

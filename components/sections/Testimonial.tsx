@@ -43,8 +43,8 @@ export default function Testimonial({ data }: TestimonialProps) {
           ref={swiperRef}
           slidesPerView={1}
           modules={[Autoplay]}
-          centeredSlides={true}
           spaceBetween={20}
+          centeredSlides
           loop={true}
           autoplay={{
             delay: 5000,
@@ -66,7 +66,7 @@ export default function Testimonial({ data }: TestimonialProps) {
           }}
           className="pb-4"
         >
-          {data.testimonials.map((item, index) => (
+          {[...data.testimonials, ...data.testimonials].map((item, index) => (
             <SwiperSlide key={index} className="h-auto">
               <TestimonialCard {...item} />
             </SwiperSlide>

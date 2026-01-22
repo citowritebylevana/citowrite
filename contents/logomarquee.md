@@ -1,24 +1,22 @@
 ---
 title: Standard & Tools Kami
 brands:
-  - name: Consort
-    logo: "/logos/brands/consort.png"
-  - name: Jamovi
-    logo: "/logos/brands/jamovi.png"
-  - name: RStudio
-    logo: "/logos/brands/rstudio.png"
-  - name: SPSS
-    logo: "/logos/brands/spss.png"
-  - name: Cochrane
-    logo: "/logos/brands/cochrane.png"
-  - name: Matlab
-    logo: "/logos/brands/matlab.png"
-  - name: Pubmed
-    logo: "/logos/brands/pubmed.png"
-  - name: Meta Analysis
-    logo: "/logos/brands/meta-analysis.png"
-  - name: Stata
-    logo: "/logos/brands/stata.png"
-  - name: Zotero
-    logo: "/logos/brands/zotero.png"
+  - name: matlab
+    image: /images/uploads/matlab.png
+  - image: /images/uploads/jamovi.png
+    name: jamovi
+  - image: /images/uploads/prisma.png
+    name: prisma
+  - image: /images/uploads/zotero.png
+    name: zotero
+  - image: /images/uploads/spss.png
+    name: spss
+  - image: /images/uploads/pubmed.png
+    name: pubmed
+  - image: /images/uploads/meta-analysis.png
+    name: meta-analiys
+  - image: /images/uploads/consort.png
+    name: consort
+  - image: /images/uploads/cochrane.png
+    name: cochrane
 ---

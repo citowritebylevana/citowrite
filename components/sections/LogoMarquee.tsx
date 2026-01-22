@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface Brand {
   name: string;
-  logo: string;
+  image: string;
 }
 
 interface LogoMarqueeProps {
@@ -25,17 +25,19 @@ export default function LogoMarquee({ data }: LogoMarqueeProps) {
           {/* Loop 2 kali: Penting untuk menyambung animasi */}
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex shrink-0 items-center gap-5 md:gap-16">
-              {data.brands.map((brand, index) => (
-                <div key={index} className="">
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    width={500}
-                    height={250}
-                    className="w-37.5 md:w-62.5"
-                  />
-                </div>
-              ))}
+              {data.brands
+                .filter((brand) => brand.image)
+                .map((brand, index) => (
+                  <div key={index} className="">
+                    <Image
+                      src={brand.image}
+                      alt={brand.name}
+                      width={500}
+                      height={250}
+                      className="w-37.5 md:w-62.5"
+                    />
+                  </div>
+                ))}
             </div>
           ))}
         </div>

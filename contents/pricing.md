@@ -1,67 +1,60 @@
 ---
-title: Pendampingan Sesuai Kebutuhan Akademik
-subtitle: Setiap penelitian memiliki tingkat kompleksitas yang berbeda. Paket pendampingan disusun fleksibel sesuai tujuan, deadline, dan kebutuhan akademik Anda.
+title: "Investasi Terbaik untuk Masa Depan Akademikmu"
+subtitle: "Pilih paket yang sesuai dengan kebutuhanmu. Tanpa biaya tersembunyi."
 cards:
-  - title: PPT Sidang
-    description: Lorem ipsum dolor sit amet consectetur. Amet pharetra non eros sit ac phasellus at.
-    price: Rp 500.000
+  - title: "Paket Silver"
+    description: "Cocok untuk pemula yang butuh panduan dasar"
+    price: "Rp 500.000"
     features:
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
+      - "Konsultasi Judul"
+      - "Review Outline"
+      - "1x Revisi"
     isHighlighted: false
-  - title: Hasil Skripsi
-    description: Lorem ipsum dolor sit amet consectetur. Amet pharetra non eros sit ac phasellus at.
-    price: Rp 1.899.000
+  - title: "Paket Gold"
+    description: "Pilihan favorit untuk bimbingan intensif"
+    price: "Rp 1.500.000"
     features:
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
+      - "Konsultasi Intensif"
+      - "Bimbingan Bab 1-3"
+      - "3x Revisi"
+      - "Gratis Cek Plagiasi"
     isHighlighted: true
-  - title: Proposal Skripsi
-    description: Lorem ipsum dolor sit amet consectetur. Amet pharetra non eros sit ac phasellus at.
-    price: Rp 1.566.000
+  - title: "Paket Platinum"
+    description: "Solusi lengkap sampai tuntas"
+    price: "Rp 3.000.000"
     features:
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
+      - "Pendampingan Full Bab 1-5"
+      - "Revisi Unlimited"
+      - "Simulasi Sidang"
+      - "Prioritas Support"
     isHighlighted: false
-  - title: Hasil Skripsi
-    description: Lorem ipsum dolor sit amet consectetur. Amet pharetra non eros sit ac phasellus at.
-    price: Rp 1.899.000
+  - title: "Paket Diamond (Exclusive)"
+    description: "Layanan premium dengan prioritas tertinggi untuk Anda yang menginginkan hasil sempurna dalam waktu singkat. Mencakup pendampingan intensif 1-on-1 dengan mentor senior spesialis, jaminan kepuasan, dan dukungan publikasi jurnal internasional bereputasi."
+    price: "Rp 5.500.000"
     features:
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
+      - "All Access Premium Mentor"
+      - "Garansi Sampai Lulus"
+      - "Bantuan Publikasi Jurnal Scopus"
+      - "Analisis Data Statistik Kompleks"
     isHighlighted: true
-  - title: PPT Sidang
-    description: Lorem ipsum dolor sit amet consectetur. Amet pharetra non eros sit ac phasellus at.
-    price: Rp 500.000
+  - title: "Paket Review & Polishing"
+    description: "Solusi tepat bagi Anda yang sudah memiliki naskah namun ragu dengan kualitasnya. Kami akan melakukan review mendalam, memperbaiki tata bahasa, struktur kalimat, dan koherensi antar bab agar naskah Anda tampil prima di hadapan penguji."
+    price: "Rp 1.000.000"
     features:
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
+      - "Proofreading & Editing"
+      - "Cek Konsistensi Logika"
+      - "Formatting Sesuai Pedoman"
+      - "Feedback Tertulis Detail"
     isHighlighted: false
-  - title: Proposal Skripsi
-    description: Lorem ipsum dolor sit amet consectetur. Amet pharetra non eros sit ac phasellus at.
-    price: Rp 1.566.000
+  - title: "Paket Analisis Data"
+    description: "Bantuan khusus untuk pengolahan data penelitian Anda. Mulai dari data cleaning, pemilihan uji statistik yang tepat, hingga interpretasi hasil yang mudah dipahami. Cocok untuk penelitian kuantitatif, kualitatif, maupun mixed-method."
+    price: "Rp 2.000.000"
     features:
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
-      - Automated Meeting Scheduling
+      - "Olah Data SPSS/Stata/R"
+      - "Interpretasi Hasil Lengkap"
+      - "Konsultasi Hasil 2x"
+      - "Revisi Olah Data"
     isHighlighted: false
-cta_text: Tanyakan Paket & Harga Lengkap
-cta_link: https://youtube.com
+cta_text: "Konsultasi Sekarang"
+cta_link: "https://wa.me/08114341297"
 ---

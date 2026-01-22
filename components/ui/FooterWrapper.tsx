@@ -2,8 +2,12 @@
 import { usePathname } from 'next/navigation';
 import Footer from '../sections/Footer';
 
-export default function FooterWrapper() {
+interface FooterWrapperProps {
+  data?: any;
+}
+
+export default function FooterWrapper({ data }: FooterWrapperProps) {
   const pathname = usePathname();
   if (pathname === '/order') return null;
-  return <Footer />;
+  return <Footer data={data} />;
 }

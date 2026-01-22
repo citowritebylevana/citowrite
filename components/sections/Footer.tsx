@@ -7,7 +7,19 @@ import Image from 'next/image';
 import { ChevronDown } from 'lucide-react'; // Tambahkan icon untuk indikator accordion
 import { SiGmail, SiInstagram, SiWhatsapp } from '@icons-pack/react-simple-icons';
 
-export default function Footer() {
+interface SocialItem {
+  name: string;
+  url: string;
+}
+
+interface FooterProps {
+  data?: {
+    description: string;
+    socials: SocialItem[];
+  };
+}
+
+export default function Footer({ data }: FooterProps) {
   // State untuk accordion mobile
   const [isLinksOpen, setIsLinksOpen] = useState(false);
 
@@ -23,10 +35,7 @@ export default function Footer() {
             <Image src={logo} alt='' height={50} width={160} />
           </div>
           <p className="text-violet-400 leading-relaxed text-sm md:text-base/6">
-            CITO Write membantu mahasiswa kedokteran, PPDS, dan
-            dokter klinisi menyusun karya ilmiah yang rapi dan siap
-            submit melalui pendampingan terstruktur dan standar
-            akademik yang jelas.
+            {data?.description || "CITO Write membantu mahasiswa kedokteran, PPDS, dan dokter klinisi menyusun karya ilmiah yang rapi dan siap submit melalui pendampingan terstruktur dan standar akademik yang jelas."}
           </p>
         </div>
 
@@ -61,9 +70,28 @@ export default function Footer() {
           <div className='mt-5 md:m-0'>
             <h3 className="text-[#f5f5f5] text-base/5 font-medium">Social Media</h3>
             <div className="flex gap-6 my-2.5 text-violet-400">
-              <a href="https://instagram.com/citowrite.id" target='_blank' aria-label="Instagram"><SiInstagram /></a>
-              <a href='mailto:citowrite.id@gmail.com' target='_blank' aria-label="Gmail"><SiGmail /></a>
-              <a href="https://wa.me/08114341297" target='_blank' aria-label="Whatsapp"><SiWhatsapp /></a>
+              {data?.socials && data.socials.length > 0 ? (
+                data.socials.map((social, index) => {
+                  const nameLower = social.name.toLowerCase();
+                  let Icon = SiInstagram;
+                  
+                  if (nameLower.includes('instagram')) Icon = SiInstagram;
+                  else if (nameLower.includes('gmail') || nameLower.includes('email')) Icon = SiGmail;
+                  else if (nameLower.includes('whatsapp') || nameLower.includes('wa')) Icon = SiWhatsapp;
+
+                  return (
+                    <a key={index} href={social.url} target='_blank' aria-label={social.name}>
+                      <Icon />
+                    </a>
+                  );
+                })
+              ) : (
+                <>
+                  <a href="https://instagram.com/citowrite.id" target='_blank' aria-label="Instagram"><SiInstagram /></a>
+                  <a href='mailto:citowrite.id@gmail.com' target='_blank' aria-label="Gmail"><SiGmail /></a>
+                  <a href="https://wa.me/08114341297" target='_blank' aria-label="Whatsapp"><SiWhatsapp /></a>
+                </>
+              )}
             </div>
             <p className="text-[#f5f5f5] text-base/5 font-medium">@citowrite.id</p>
           </div>
