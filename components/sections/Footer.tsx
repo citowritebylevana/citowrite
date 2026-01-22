@@ -2,7 +2,7 @@
 
 import { useState } from 'react'; // Tambahkan useState
 import Link from 'next/link';
-import logo from '@/public/logos/site/logo-horizontal.png'
+import logo from '@/public/logos/site/logo.png'
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react'; // Tambahkan icon untuk indikator accordion
 import { SiGmail, SiInstagram, SiWhatsapp } from '@icons-pack/react-simple-icons';

@@ -115,6 +115,7 @@ collections:
               - { label: "Konten", name: "content", widget: "text" }
               - { label: "Nama", name: "name", widget: "string" }
               - { label: "Role", name: "role", widget: "string" }
+              - { label: "Gambar", name: "image", widget: "image" }
 
       # --- FILE 6: FAQ ---
       - name: "faq"

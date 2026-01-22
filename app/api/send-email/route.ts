@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: "Semua field wajib diisi" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -64,13 +64,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { success: true, message: "Email berhasil dikirim" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Email error:", error);
     return NextResponse.json(
       { error: "Gagal mengirim email. Coba lagi nanti." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

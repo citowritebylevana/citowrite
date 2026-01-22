@@ -97,15 +97,14 @@ export default function Contact({ data }: ContactProps) {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(
-          errorData.error || "Gagal mengirim email. Coba lagi."
-        );
+        throw new Error(errorData.error || "Gagal mengirim email. Coba lagi.");
       }
 
       // Tampilkan notif sukses
       setSubmitStatus({
         type: "success",
-        message: "✓ Pesan berhasil dikirim! Tim kami akan segera menghubungi Anda.",
+        message:
+          "✓ Pesan berhasil dikirim! Tim kami akan segera menghubungi Anda.",
       });
 
       // Reset form
@@ -120,7 +119,9 @@ export default function Contact({ data }: ContactProps) {
     } catch (error) {
       console.error("Error sending message:", error);
       const errorMessage =
-        error instanceof Error ? error.message : "Terjadi kesalahan yang tidak terduga";
+        error instanceof Error
+          ? error.message
+          : "Terjadi kesalahan yang tidak terduga";
       setSubmitStatus({
         type: "error",
         message: `✗ ${errorMessage}`,

@@ -5,75 +5,82 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { sendWhatsAppMessage, formatOrderFormMessage } from "@/lib/whatsapp";
 
-interface FormData {
-  name: string;
-  email: string;
-  serviceType: string;
-  details: string;
-  file: File | null;
+// 1. Definisi Tipe Data Props
+interface ServiceItem {
+  title: string;
 }
 
-interface UploadedFile {
-  fileUrl: string;
-  fileName: string;
+interface OrderFormProps {
+  services?: ServiceItem[]; // Data dinamis dari CMS (Optional array)
 }
 
-// Mapping dari title pricing card ke service type options
-const serviceMapping: Record<string, string> = {
-  "PPT Sidang": "ppt-sidang",
-  "Hasil Skripsi": "hasil-skripsi",
-  "Proposal Skripsi": "proposal-skripsi",
+// 2. Helper untuk membuat slug (PPT Sidang -> ppt-sidang)
+const slugify = (text: string) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Ganti spasi dengan strip
+    .replace(/[^\w\-]+/g, "") // Hapus karakter aneh
+    .replace(/\-\-+/g, "-"); // Ganti strip ganda
 };
 
-export default function OrderForm() {
+export default function OrderForm({ services = [] }: OrderFormProps) {
   const searchParams = useSearchParams();
-  const service = searchParams.get("service");
+  const serviceParam = searchParams.get("service");
+
+  interface FormData {
+    name: string;
+    email: string;
+    serviceType: string;
+    details: string;
+    fileLink: string;
+  }
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     serviceType: "",
     details: "",
-    file: null,
+    fileLink: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
 
-  // Set serviceType berdasarkan query parameter
+  // 3. LOGIKA OTOMATIS: Pilih layanan berdasarkan URL & Data CMS
   useEffect(() => {
-    if (service && serviceMapping[service]) {
-      setFormData((prev) => ({
-        ...prev,
-        serviceType: serviceMapping[service],
-      }));
+    if (serviceParam && services.length > 0) {
+      // Normalisasi parameter URL (misal: "PPT Sidang" atau "ppt-sidang")
+      const paramSlug = slugify(serviceParam);
+
+      // Cari apakah ada service yang cocok
+      const foundService = services.find(
+        (s) => slugify(s.title) === paramSlug
+      );
+
+      if (foundService) {
+        setFormData((prev) => ({
+          ...prev,
+          serviceType: slugify(foundService.title),
+        }));
+      }
     }
-  }, [service]);
+  }, [serviceParam, services]);
 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
-    const { name, value, type } = e.target;
-
-    if (type === "file") {
-      const fileInput = e.target as HTMLInputElement;
-      const file = fileInput.files?.[0] || null;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: file,
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,88 +89,54 @@ export default function OrderForm() {
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      // Validasi form
-      if (!formData.name.trim()) {
-        throw new Error("Nama lengkap wajib diisi");
-      }
-      if (!formData.email.trim()) {
-        throw new Error("Email wajib diisi");
-      }
-      if (!formData.serviceType) {
-        throw new Error("Jenis layanan wajib dipilih");
-      }
-      if (!formData.details.trim()) {
-        throw new Error("Detail kebutuhan wajib diisi");
-      }
+      // Validasi
+      if (!formData.name.trim()) throw new Error("Nama lengkap wajib diisi");
+      if (!formData.email.trim()) throw new Error("Email wajib diisi");
+      if (!formData.serviceType) throw new Error("Jenis layanan wajib dipilih");
+      if (!formData.details.trim()) throw new Error("Detail kebutuhan wajib diisi");
 
-      let finalFileUrl = "";
+      // Siapkan Data Pesan
+      // Kita perlu mencari Title asli berdasarkan slug yang dipilih user agar pesan WA lebih rapi
+      // Jika tidak ketemu, pakai value slug-nya saja (fallback)
+      const selectedServiceObj = services.find(s => slugify(s.title) === formData.serviceType);
+      const serviceDisplayTitle = selectedServiceObj ? selectedServiceObj.title : formData.serviceType;
 
-      // 1. LOGIKA UPLOAD (Jika user melampirkan file)
-      if (formData.file) {
-        try {
-          const uploadResponse = await fetch(
-            `/api/upload?filename=${encodeURIComponent(formData.file.name)}`,
-            {
-              method: "POST",
-              body: formData.file,
-            }
-          );
-
-          if (!uploadResponse.ok) {
-            const errorData = await uploadResponse.json().catch(() => ({}));
-            throw new Error(
-              errorData.error || "Gagal mengupload file. Coba lagi."
-            );
-          }
-
-          const uploadedData = await uploadResponse.json();
-          finalFileUrl = uploadedData.fileUrl;
-          setUploadedFile(uploadedData);
-        } catch (uploadError) {
-          console.error("Upload error:", uploadError);
-          throw new Error(
-            uploadError instanceof Error
-              ? uploadError.message
-              : "Terjadi kesalahan saat mengupload file"
-          );
-        }
-      }
-
-      // 2. KIRIM KE WHATSAPP
       const messageData = {
         name: formData.name.trim(),
         email: formData.email.trim(),
-        serviceType: formData.serviceType,
+        serviceType: serviceDisplayTitle, // Kirim Title asli ke WA (contoh: "PPT Sidang")
         details: formData.details.trim(),
-        fileLink: finalFileUrl,
+        fileLink: formData.fileLink.trim(),
       };
 
       const message = formatOrderFormMessage(messageData);
+
+      await new Promise(resolve => setTimeout(resolve, 800)); // UX Delay
       sendWhatsAppMessage(message);
 
-      // 3. TAMPILKAN NOTIF SUKSES
       setSubmitStatus({
         type: "success",
-        message:
-          "✓ Pesan berhasil dikirim ke WhatsApp! Silakan selesaikan obrolan dengan tim kami.",
+        message: "✓ Membuka WhatsApp...",
       });
 
-      // 4. RESET FORM
+      // Reset Form
       setTimeout(() => {
         setFormData({
           name: "",
           email: "",
           serviceType: "",
           details: "",
-          file: null,
+          fileLink: "",
         });
-        setUploadedFile(null);
         setSubmitStatus({ type: null, message: "" });
       }, 3000);
+
     } catch (error) {
       console.error("Error:", error);
       const errorMessage =
-        error instanceof Error ? error.message : "Terjadi kesalahan yang tidak terduga";
+        error instanceof Error
+          ? error.message
+          : "Terjadi kesalahan yang tidak terduga";
       setSubmitStatus({
         type: "error",
         message: `✗ ${errorMessage}`,
@@ -172,6 +145,7 @@ export default function OrderForm() {
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="w-full px-4 max-w-600 mx-auto py-18 md:px-17.5 md:mt-18">
       <div className="rounded-[20px] md:border md:border-gray-500 md:p-5">
@@ -214,12 +188,7 @@ export default function OrderForm() {
               value={formData.name}
               onChange={handleChange}
               placeholder="Contoh: Andi Sentosa"
-              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none
-
-              shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
-
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-              "
+              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
               required
             />
           </div>
@@ -235,17 +204,12 @@ export default function OrderForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="contoh@example.com"
-              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none 
-
-              shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
-
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-              "
+              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
               required
             />
           </div>
 
-          {/* Jenis Layanan - Two Column on Desktop */}
+          {/* 4. Dropdown Jenis Layanan (DINAMIS) */}
           <div className="w-full md:col-span-2">
             <label className="block text-sm font-semibold text-indigo-500 mb-2.5">
               Jenis Layanan
@@ -254,26 +218,30 @@ export default function OrderForm() {
               name="serviceType"
               value={formData.serviceType}
               onChange={handleChange}
-              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none
-
-              shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
-
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-              "
+              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
               required
             >
               <option value="" disabled className="bg-gray-900">
                 Pilih Jenis layanan
               </option>
-              <option value="ppt-sidang" className="bg-gray-900">
-                PPT Sidang
-              </option>
-              <option value="hasil-skripsi" className="bg-gray-900">
-                Hasil Skripsi
-              </option>
-              <option value="proposal-skripsi" className="bg-gray-900">
-                Proposal Skripsi
-              </option>
+
+              {/* Looping Data Services dari CMS */}
+              {services.length > 0 ? (
+                services.map((service, index) => (
+                  <option
+                    key={index}
+                    value={slugify(service.title)}
+                    className="bg-gray-900"
+                  >
+                    {service.title}
+                  </option>
+                ))
+              ) : (
+                <option value="" disabled className="bg-gray-900">
+                  Memuat layanan...
+                </option>
+              )}
+
               <option value="other" className="bg-gray-900">
                 Lainnya
               </option>
@@ -291,40 +259,27 @@ export default function OrderForm() {
               onChange={handleChange}
               placeholder="Ceritakan detail kebutuhan atau kesulitan anda..."
               rows={12}
-              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none
-
-              shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
-
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-              "
+              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
               required
             />
           </div>
 
-          {/* File Pendukung */}
+          {/* Link File Pendukung */}
           <div className="md:col-span-2">
             <label className="block text-sm font-semibold text-indigo-500 mb-1.5">
-              File Pendukung (Apabila ada)
+              Link File Pendukung (Google Drive)
             </label>
             <p className="text-sm text-[#f5f5f5] mb-2.5">
-              File akan diupload ke Google Drive dan link-nya akan dikirim
+              Pastikan akses link diset ke "Anyone with the link" (Siapa saja yang memiliki link)
             </p>
             <input
-              type="file"
-              name="file"
+              type="text"
+              name="fileLink"
+              value={formData.fileLink}
               onChange={handleChange}
-              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none
-
-              shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)]
-
-              hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]
-              "
+              className="w-full px-3 md:px-8 py-4 rounded-[10px] text-white placeholder-gray-500 transition-all outline-none shadow-[inset_-10px_-15px_20px_0px_rgba(255,255,255,0.05),inset_10px_3px_30px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3),0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[inset_0px_4px_39px_0px_rgba(97,95,255,0.4),inset_0px_0px_0px_0px_rgb(0,0,0),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]"
+              placeholder="https://drive.google.com/..."
             />
-            {uploadedFile && (
-              <p className="text-sm text-green-400 mt-2">
-                ✓ File &quot{uploadedFile.fileName}&quot siap dikirim
-              </p>
-            )}
           </div>
 
           {/* Submit Button */}
@@ -336,11 +291,11 @@ export default function OrderForm() {
             {isSubmitting ? (
               <>
                 <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
-                Mengirim...
+                Memproses...
               </>
             ) : (
               <>
-                Order Sekarang
+                Kirim ke WhatsApp
                 <ArrowRight className="w-5 h-5" />
               </>
             )}

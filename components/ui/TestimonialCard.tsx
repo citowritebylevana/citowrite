@@ -1,21 +1,38 @@
 import { Quote } from "lucide-react";
+import Image from "next/image"; // 1. Import komponen Image
 
 interface TestimonialCardProps {
   content: string;
   name: string;
   role: string;
+  image?: string; // 2. Tambahkan prop image (opsional)
 }
 
 export default function TestimonialCard({
   content,
   name,
   role,
+  image,
 }: TestimonialCardProps) {
   return (
     <div className="rounded-[20px] m-1 mt-7.5 md:mt-1 p-3.5 flex flex-col min-h-125 shadow-[inset_-10px_-10px_10px_0px_rgba(255,255,255,0.02),inset_10px_7px_15px_0px_rgba(0,0,0,0.3),1px_1px_0px_0px_rgba(255,255,255,0.3),-1px_-1px_0px_0px_rgba(255,255,255,0.3)]">
-      {/* Image Placeholder */}
-      <div className="w-full h-58 bg-gray-400/30 rounded-2xl">
-        {/* Placeholder visual */}
+
+      {/* 3. Image Container */}
+      <div className="relative w-full h-58 rounded-2xl overflow-hidden bg-gray-400/30">
+        {image ? (
+          <Image
+            src={image}
+            alt={`Project oleh ${name}`}
+            fill // Mengisi container parent
+            className="object-cover" // Agar gambar tidak gepeng (crop tengah)
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Optimasi loading
+          />
+        ) : (
+          // Fallback jika tidak ada gambar (Placeholder lama)
+          <div className="w-full h-full flex items-center justify-center text-gray-500">
+            <span className="text-sm">No Image</span>
+          </div>
+        )}
       </div>
 
       {/* Quote Icon */}

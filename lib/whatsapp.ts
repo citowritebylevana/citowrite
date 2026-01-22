@@ -1,5 +1,8 @@
-// Nomor WhatsApp (gunakan format internasional tanpa + atau 0)
-const WHATSAPP_NUMBER = "6281143412970"; // Format: 62 + nomor lokal tanpa 0 (dari 08114341297)
+// Konfigurasi Kontak
+// PENTING: Ganti angka di bawah sesuai nomor WhatsApp Admin yang aktif
+// Format: Kode Negara (62) + Nomor HP tanpa angka 0 di depan
+// Contoh: 08114341297 menjadi 628114341297
+const WHATSAPP_NUMBER = "6287764632708";
 const CONTACT_EMAIL = "citowrite.id@gmail.com";
 
 export const sendWhatsAppMessage = (message: string): void => {
@@ -15,9 +18,9 @@ export const sendEmailMessage = (data: {
   message: string;
 }): void => {
   const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-    data.subject
+    data.subject,
   )}&body=${encodeURIComponent(
-    `Dari: ${data.name} (${data.email})\n\n${data.message}`
+    `Dari: ${data.name} (${data.email})\n\n${data.message}`,
   )}`;
   window.location.href = mailtoLink;
 };
@@ -37,26 +40,19 @@ export const formatOrderFormMessage = (data: {
   details: string;
   fileLink?: string;
 }): string => {
-  const serviceNames: Record<string, string> = {
-    "ppt-sidang": "PPT Sidang",
-    "hasil-skripsi": "Hasil Skripsi",
-    "proposal-skripsi": "Proposal Skripsi",
-    "other": "Lainnya",
-  };
+  // Kita tidak perlu mapping manual lagi karena OrderForm sudah mengirimkan Judul Asli (Service Title)
 
-  const serviceName = serviceNames[data.serviceType] || data.serviceType;
-
-  return `🎓 *ORDER BARU - Citowrite*
+  return `*ORDER BARU - Citowrite*
 
 *Nama Klien:* ${data.name}
 *Email:* ${data.email}
 
-*📋 Jenis Layanan:* ${serviceName}
+*Jenis Layanan:* ${data.serviceType}
 
-*📝 Detail Kebutuhan:*
+*Detail Kebutuhan:*
 ${data.details}
 
-${data.fileLink ? `*📎 File Pendukung:* ${data.fileLink}` : "*📎 File Pendukung:* Tidak ada"}
+${data.fileLink ? `*File Pendukung:* ${data.fileLink}` : "*File Pendukung:* Tidak ada"}
 
 ---
 Pesan ini dikirim otomatis dari Order Form Citowrite`.trim();

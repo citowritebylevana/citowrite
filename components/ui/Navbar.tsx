@@ -144,9 +144,9 @@ export default function Navbar() {
           {/* Logo Section */}
           <Link
             href="/"
-            className="h-10.5 w-10.5 cursor-pointer md:h-25 md:w-25"
+            className="h-10 w-20  cursor-pointer md:h-26 md:w-30"
           >
-            <Image src={logo} height={150} width={150} alt="Website logo" />
+            <Image className="h-full w-full object-contain" src={logo} height={150} width={250} alt="Website logo" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -169,9 +169,8 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`text-white py-5 hover:bg-white/10 rounded-lg transition-colors ${
-                isOpen ? "menu-icon-open" : "menu-icon-close"
-              }`}
+              className={`text-white py-5 hover:bg-white/10 rounded-lg transition-colors ${isOpen ? "menu-icon-open" : "menu-icon-close"
+                }`}
             >
               {isOpen ? <X /> : <Menu />}
             </button>
