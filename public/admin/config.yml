@@ -1,11 +1,12 @@
 editor:
   preview: false
 
+# Use DecapBridge classic auth (required)
 backend:
   name: git-gateway
-  repo: strataacademybylevana/strataacademy-staging
+  repo: citowritebylevana/citowrite
   branch: main
-  identity_url: https://auth.decapbridge.com/sites/d25aa2d9-287d-4ad5-9527-0eae898d7586
+  identity_url: https://auth.decapbridge.com/sites/5310c4c7-c285-44ae-82a5-7b3a64001931
   gateway_url: https://gateway.decapbridge.com
 
   # See who did what (optional)
@@ -21,7 +22,7 @@ backend:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://strataacademy.online
+site_url: https://citowrite.vercel.app
 
 # Add site links in Decap CMS (optional)
 media_folder: "public/images/uploads"
