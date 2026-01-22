@@ -1,5 +1,3 @@
-local_backend: true
-
 editor:
   preview: false
 

@@ -9,6 +9,7 @@ import { SiGmail, SiInstagram, SiWhatsapp } from '@icons-pack/react-simple-icons
 
 interface SocialItem {
   name: string;
+  icon: string;
   url: string;
 }
 
@@ -23,6 +24,12 @@ export default function Footer({ data }: FooterProps) {
   // State untuk accordion mobile
   const [isLinksOpen, setIsLinksOpen] = useState(false);
 
+  const icons: { [key: string]: React.ElementType } = {
+    SiInstagram: SiInstagram,
+    SiGmail: SiGmail,
+    SiWhatsapp: SiWhatsapp
+  };
+
   return (
     <footer className="pt-10 pb-8 px-4 md:px-17.5 max-w-450 mx-auto">
 
@@ -32,7 +39,7 @@ export default function Footer({ data }: FooterProps) {
         {/* Brand Column */}
         <div className="max-w-md">
           <div className="mb-2.5">
-            <Image src={logo} alt='' height={50} width={160} />
+            <Image src={logo} alt='' height={250} width={500} className="w-25 md:w-35" />
           </div>
           <p className="text-violet-400 leading-relaxed text-sm md:text-base/6">
             {data?.description || "CITO Write membantu mahasiswa kedokteran, PPDS, dan dokter klinisi menyusun karya ilmiah yang rapi dan siap submit melalui pendampingan terstruktur dan standar akademik yang jelas."}
@@ -72,13 +79,7 @@ export default function Footer({ data }: FooterProps) {
             <div className="flex gap-6 my-2.5 text-violet-400">
               {data?.socials && data.socials.length > 0 ? (
                 data.socials.map((social, index) => {
-                  const nameLower = social.name.toLowerCase();
-                  let Icon = SiInstagram;
-                  
-                  if (nameLower.includes('instagram')) Icon = SiInstagram;
-                  else if (nameLower.includes('gmail') || nameLower.includes('email')) Icon = SiGmail;
-                  else if (nameLower.includes('whatsapp') || nameLower.includes('wa')) Icon = SiWhatsapp;
-
+                  const Icon = icons[social.icon] || SiInstagram;
                   return (
                     <a key={index} href={social.url} target='_blank' aria-label={social.name}>
                       <Icon />
