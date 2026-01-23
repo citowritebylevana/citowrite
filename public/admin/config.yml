@@ -22,7 +22,7 @@ backend:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://citowrite.vercel.app
+site_url: https://citowrite.id
 
 # Add site links in Decap CMS (optional)
 media_folder: "public/images/uploads"
