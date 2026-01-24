@@ -11,5 +11,5 @@ socials:
     url: mailto:citowrite.id@gmail.com
   - name: Whatsapp
     icon: SiWhatsapp
-    url: https://wa.me/081775762704
+    url: https://wa.me/6281776752704
 ---
