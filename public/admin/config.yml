@@ -144,8 +144,6 @@ collections:
             widget: "list"
             summary: "{{fields.title}}: {{fields.value}}"
             fields:
-              - { label: "Icon", name: "icon", widget: "string" }
-              - { label: "Judul", name: "title", widget: "string" }
               - { label: "Nilai", name: "value", widget: "string" }
               - { label: "Link", name: "href", widget: "string" }
 
