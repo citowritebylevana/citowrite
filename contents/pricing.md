@@ -56,5 +56,5 @@ cards:
       - "Revisi Olah Data"
     isHighlighted: false
 cta_text: "Konsultasi Sekarang"
-cta_link: "https://wa.me/08114341297"
+cta_link: "https://wa.me/6281776752704"
 ---
