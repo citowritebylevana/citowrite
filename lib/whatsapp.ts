@@ -2,7 +2,7 @@
 // PENTING: Ganti angka di bawah sesuai nomor WhatsApp Admin yang aktif
 // Format: Kode Negara (62) + Nomor HP tanpa angka 0 di depan
 // Contoh: 08114341297 menjadi 628114341297
-const WHATSAPP_NUMBER = "628114341297";
+const WHATSAPP_NUMBER = "6281776752704";
 const CONTACT_EMAIL = "citowrite.id@gmail.com";
 
 export const sendWhatsAppMessage = (message: string): void => {

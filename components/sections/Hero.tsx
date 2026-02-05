@@ -63,7 +63,7 @@ export default function Hero({ data }: HeroProps) {
             </a>
 
             {/* Tombol WhatsApp (Outline) */}
-            <a href="https://whatsapp.com/193323" target="_blank"
+            <a href="https://wa.me/6281776752704" target="_blank"
               className="flex items-center justify-center gap-x-2.5 py-2.5 px-8 md:px-8 md:py-2.5 bg-transparent border border-indigo-500 hover:bg-white/10 text-[#f5f5f5]
               rounded-[50px] text-base/5 font-medium transition-all duration-200"
             >

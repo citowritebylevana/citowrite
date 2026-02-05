@@ -1,60 +1,42 @@
 ---
-title: "Investasi Terbaik untuk Masa Depan Akademikmu"
-subtitle: "Pilih paket yang sesuai dengan kebutuhanmu. Tanpa biaya tersembunyi."
+title: Paket Layanan CITO Write
+subtitle: Solusi penulisan dan analisis riset kedokteran yang terstruktur,
+  berbasis metodologi ilmiah, dan disesuaikan dengan kebutuhan akademik hingga
+  publikasi.
 cards:
-  - title: "Paket Silver"
-    description: "Cocok untuk pemula yang butuh panduan dasar"
-    price: "Rp 500.000"
+  - title: Skripsi Kedokteran S1
+    description: Paket ini ditujukan untuk mahasiswa kedokteran yang membutuhkan
+      pendampingan penyusunan skripsi yang metodologis, logis, dan sesuai
+      standar akademik. Fokus pada kejelasan desain penelitian, konsistensi
+      variabel, serta kelayakan pelaksanaan di tingkat S1. Disusun agar mudah
+      disetujui pembimbing dan siap dieksekusi sebagai penelitian skripsi.
+    price: 1.750.000
     features:
-      - "Konsultasi Judul"
-      - "Review Outline"
-      - "1x Revisi"
-    isHighlighted: false
-  - title: "Paket Gold"
-    description: "Pilihan favorit untuk bimbingan intensif"
-    price: "Rp 1.500.000"
-    features:
-      - "Konsultasi Intensif"
-      - "Bimbingan Bab 1-3"
-      - "3x Revisi"
-      - "Gratis Cek Plagiasi"
+      - Konsultasi Judul dan outline
+      - Penyusunan metode penelitian yang feasible (observasional/eksperimental
+        sederhana)
+      - Revisi terarah sesuai masukan dosen pembimbing
     isHighlighted: true
-  - title: "Paket Platinum"
-    description: "Solusi lengkap sampai tuntas"
-    price: "Rp 3.000.000"
+  - title: Systematic Review + Meta-Analysis
+    description: Layanan komprehensif untuk penyusunan Systematic Review dan
+      Meta-Analysis berbasis standar PRISMA dan analisis statistik yang valid.
+      Include Risk of Bias, Forest Plot dan Funnel Plot
+    price: Rp 1.500.000
     features:
-      - "Pendampingan Full Bab 1-5"
-      - "Revisi Unlimited"
-      - "Simulasi Sidang"
-      - "Prioritas Support"
-    isHighlighted: false
-  - title: "Paket Diamond (Exclusive)"
-    description: "Layanan premium dengan prioritas tertinggi untuk Anda yang menginginkan hasil sempurna dalam waktu singkat. Mencakup pendampingan intensif 1-on-1 dengan mentor senior spesialis, jaminan kepuasan, dan dukungan publikasi jurnal internasional bereputasi."
-    price: "Rp 5.500.000"
-    features:
-      - "All Access Premium Mentor"
-      - "Garansi Sampai Lulus"
-      - "Bantuan Publikasi Jurnal Scopus"
-      - "Analisis Data Statistik Kompleks"
+      - Strategi pencarian literatur & screening terstandar
+      - Analisis statistik (effect size, heterogenitas, forest & funnel plot)
+      - Manuskrip ilmiah siap submit jurnal
     isHighlighted: true
-  - title: "Paket Review & Polishing"
-    description: "Solusi tepat bagi Anda yang sudah memiliki naskah namun ragu dengan kualitasnya. Kami akan melakukan review mendalam, memperbaiki tata bahasa, struktur kalimat, dan koherensi antar bab agar naskah Anda tampil prima di hadapan penguji."
-    price: "Rp 1.000.000"
+  - title: Meta-Analysis Only
+    description: Paket ini ditujukan bagi klien yang telah memiliki Systematic
+      Review final dan data studi terpilih, dan membutuhkan analisis statistik
+      lanjutan.
+    price: Rp 3.000.000
     features:
-      - "Proofreading & Editing"
-      - "Cek Konsistensi Logika"
-      - "Formatting Sesuai Pedoman"
-      - "Feedback Tertulis Detail"
+      - Ekstraksi dan verifikasi data kuantitatif
+      - Perhitungan effect size & uji heterogenitas
+      - Visualisasi dan interpretasi hasil meta-analysis
     isHighlighted: false
-  - title: "Paket Analisis Data"
-    description: "Bantuan khusus untuk pengolahan data penelitian Anda. Mulai dari data cleaning, pemilihan uji statistik yang tepat, hingga interpretasi hasil yang mudah dipahami. Cocok untuk penelitian kuantitatif, kualitatif, maupun mixed-method."
-    price: "Rp 2.000.000"
-    features:
-      - "Olah Data SPSS/Stata/R"
-      - "Interpretasi Hasil Lengkap"
-      - "Konsultasi Hasil 2x"
-      - "Revisi Olah Data"
-    isHighlighted: false
-cta_text: "Konsultasi Sekarang"
-cta_link: "https://wa.me/08114341297"
+cta_text: Konsultasi Sekarang
+cta_link: https://wa.me/6281776752704
 ---
