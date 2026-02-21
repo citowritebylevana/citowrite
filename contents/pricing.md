@@ -21,7 +21,7 @@ cards:
     description: Layanan komprehensif untuk penyusunan Systematic Review dan
       Meta-Analysis berbasis standar PRISMA dan analisis statistik yang valid.
       Include Risk of Bias, Forest Plot dan Funnel Plot
-    price: Rp 1.500.000
+    price: Rp 3.000.000
     features:
       - Strategi pencarian literatur & screening terstandar
       - Analisis statistik (effect size, heterogenitas, forest & funnel plot)
@@ -31,7 +31,7 @@ cards:
     description: Paket ini ditujukan bagi klien yang telah memiliki Systematic
       Review final dan data studi terpilih, dan membutuhkan analisis statistik
       lanjutan.
-    price: Rp 3.000.000
+    price: Rp 1.500.000
     features:
       - Ekstraksi dan verifikasi data kuantitatif
       - Perhitungan effect size & uji heterogenitas
