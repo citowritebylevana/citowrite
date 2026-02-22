@@ -52,7 +52,7 @@ export default function Hero({ data }: HeroProps) {
           {/* Group Tombol */}
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
             {/* Tombol Order (Solid) */}
-            <a href="#pricing"
+            <a href="#service"
               className="flex items-center gap-x-2.5 justify-center py-2.5 px-8 md:px-8 md:py-2.5 bg-indigo-500 hover:bg-purple-700 rounded-[50px] text-base/5
               font-semibold transition-all duration-200 group"
             >
