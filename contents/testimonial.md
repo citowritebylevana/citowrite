@@ -1,23 +1,9 @@
 ---
-title: "Apa Kata Mereka?"
-subtitle: "Cerita sukses dari rekan sejawat yang telah kami bantu."
+title: Apa Kata Mereka?
+subtitle: Cerita sukses dari teman-teman sejawat yang telah kami bantu
 testimonials:
-  - content: "Sangat terbantu dengan bimbingan dari Cito Write. Revisi jadi lebih terarah dan dosen pembimbing acc dengan cepat."
-    name: "dr. Andi"
-    role: "PPDS Penyakit Dalam"
-  - content: "Respon cepat dan masukan yang diberikan sangat detail. Worth it banget!"
-    name: "Siti Rahma"
-    role: "Mahasiswa Kedokteran"
-  - content: "Awalnya bingung mulai dari mana, tapi tim Cito Write memandu step by step sampai selesai."
-    name: "Budi Santoso, S.Ked"
-    role: "Koas"
-  - content: "Saya sangat merekomendasikan Cito Write bagi siapa saja yang sedang berjuang dengan tesis atau disertasi. Mentornya sangat kompeten, sabar, dan benar-benar menguasai materi. Diskusi yang dilakukan sangat membuka wawasan sehingga saya tidak hanya sekadar 'terima jadi', tapi juga paham betul apa yang saya tulis. Terima kasih banyak!"
-    name: "dr. Rina P., Sp.A"
-    role: "Dokter Spesialis Anak"
-  - content: "Awalnya saya skeptis menggunakan jasa konsultan karena takut hasilnya tidak orisinal. Tapi Cito Write membuktikan sebaliknya. Mereka hanya membimbing dan mengarahkan, sementara ide tetap dari saya. Proses brainstorming-nya luar biasa deep, membuat alur penelitian saya menjadi sangat logis dan kuat secara metodologi. Jurnal saya pun tembus Q2!"
-    name: "Antonius Wibowo"
-    role: "Mahasiswa S3 Kesehatan Masyarakat"
-  - content: "Deadline tinggal 2 minggu dan saya masih stuck di Bab 4. Cito Write benar-benar penyelamat! Tim mereka kerja super cepat tapi tetap teliti. Analisis data yang awalnya bikin pusing jadi mudah dimengerti berkat penjelasan mentornya. Alhamdulillah bisa sidang tepat waktu dengan nilai yang memuaskan."
-    name: "Sarah Amalia"
-    role: "Mahasiswa Kedokteran Gigi"
+  - image: /images/uploads/846a6800-8f70-4306-894d-21cfddd87855.jpg
+    name: "dr. R "
+    role: Magister Biomedis
+    content: Asistensi manage referensi dan penulisan hasil & pembahasan
 ---
