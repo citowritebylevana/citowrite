@@ -1,17 +1,20 @@
 ---
 title: Siapa Kami & Apa yang Kami Bantu
-subtitle: Kami menyediakan layanan pendampingan penelitian dan penulisan ilmiah di bidang kedokteran. Kami membantu mahasiswa FK menyusun, merapikan, dan menyelesaikan karya ilmiah secara sistematis dan profesional.
+subtitle: CITO Write adalah platform layanan riset dan akademik yang menyediakan
+  asistensi dan penulisan ilmiah berbasis metodologi kuat. Dokter yang arahkan,
+  kami bantu tulis proposal, analisis data, dan penulisan hingga publikasi
+  dengan standar internasional.
 stats:
   - icon: Users
-    value: "50+"
+    value: 50+
     label: Klien Terbantu
   - icon: Inbox
-    value: "10+"
+    value: 19+
     label: On Going Task
   - icon: Clock
-    value: "96%"
+    value: 96%
     label: Tepat Waktu
   - icon: Bot
-    value: "100%"
+    value: 100%
     label: Bebas AI
 ---

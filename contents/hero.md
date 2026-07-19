@@ -1,4 +1,6 @@
 ---
-title: Hai Doc! Kami Bantu Apa Hari Ini 
-subtitle: CITO Write membantu mahasiswa kedokteran, PPDS, dan dokter klinisi menyusun karya ilmiah yang rapi, logis, dan siap submit—mulai dari proposal, skripsi, hingga systematic review & meta-analysis—dengan mentoring step-by- step dan standar akademik yang jelas. 
+title: Hai Dok! Kami Bantu Apa Hari Ini?
+subtitle: Layanan asisten riset kami siap membantu dokter dari ide hingga
+  publikasi Systematic Review dan Meta Analysis, proposal, analisis data, hingga
+  penulisan berbasis metodologi kuat dan mentoring langsung.
 ---

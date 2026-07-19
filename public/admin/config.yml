@@ -22,7 +22,8 @@ backend:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://citowrite.vercel.app
+site_url: https://citowrite.id
+
 
 # Add site links in Decap CMS (optional)
 media_folder: "public/images/uploads"
@@ -143,8 +144,6 @@ collections:
             widget: "list"
             summary: "{{fields.title}}: {{fields.value}}"
             fields:
-              - { label: "Icon", name: "icon", widget: "string" }
-              - { label: "Judul", name: "title", widget: "string" }
               - { label: "Nilai", name: "value", widget: "string" }
               - { label: "Link", name: "href", widget: "string" }
 

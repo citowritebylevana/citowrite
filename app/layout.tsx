@@ -13,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "CITO Write",
+  title: "CITO Write | Jasa Ilmiah Kedokteran #1 di Indonesia",
   description: "Jasa Ilmiah Kedokteran #1 di Indonesia",
 };
 
