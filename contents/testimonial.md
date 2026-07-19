@@ -6,4 +6,10 @@ testimonials:
     name: "dr. R "
     role: Magister Biomedis
     content: Asistensi manage referensi dan penulisan hasil & pembahasan
+  - name: dr. RDP
+    role: Meta analysis PIT Kardio
+    image: /images/uploads/img_3757.jpg
+    content: >
+      "Alhamdulillah, akhirnya deadlinenya yang sedikit buru2 bisa dibantu,
+      hehe, makasih min"
 ---
